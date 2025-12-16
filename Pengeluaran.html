@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Pemasukan Kas - Sistem Koperasi Bina Tirta Lestari</title>
+  <title>Pengeluaran Kas - Sistem Koperasi Bina Tirta Lestari</title>
   <link rel="shortcut icon" type="image/png" href="./assets/images/logos/favicon.png" />
   <link rel="stylesheet" href="./assets/css/styles.min.css" />
   <!-- DataTables CSS -->
@@ -91,8 +91,8 @@
             <div class="col-12">
               <div class="d-flex justify-content-between align-items-center">
                 <div>
-                  <h4 class="fw-semibold mb-1">Transaksi Pemasukan Kas</h4>
-                  <p class="text-muted fs-3 mb-0">Kelola transaksi pemasukan kas tunai</p>
+                  <h4 class="fw-semibold mb-1">Transaksi Pengeluaran Kas</h4>
+                  <p class="text-muted fs-3 mb-0">Kelola transaksi Pengeluaran kas tunai</p>
                 </div>
               </div>
             </div>
@@ -145,7 +145,7 @@
           <div class="card">
             <div class="card-body">
               <div class="table-responsive">
-                <table id="tabelPemasukan" class="table table-hover align-middle rounded-2 border overflow-hidden"
+                <table id="tabelPengeluaran" class="table table-hover align-middle rounded-2 border overflow-hidden"
                   style="width:100%">
                   <thead class="table-primary">
                     <tr>
@@ -156,8 +156,8 @@
                       <th>Kode Transaksi</th>
                       <th>Tanggal Transaksi</th>
                       <th>Uraian</th>
-                      <th>Untuk Kas</th>
-                      <th>Dari Akun</th>
+                      <th>Dari Kas</th>
+                      <th>Untuk Akun</th>
                       <th class="text-end">Jumlah</th>
                       <th class="text-center">User</th>
                     </tr>
@@ -181,7 +181,7 @@
                       </td>
                       <td class="text-muted">Modal Awal</td>
                       <td class="text-end">
-                        <span class="fw-bold text-success fs-4">Rp 5.000.000</span>
+                        <span class="fw-bold text-succes fs-4">Rp 5.000.000</span>
                       </td>
                       <td class="text-center">
                         <span class="badge border border-secondary text-secondary px-3 py-1 fw-semibold">
@@ -207,7 +207,7 @@
                       </td>
                       <td class="text-muted">Pendapatan Lainnya</td>
                       <td class="text-end">
-                        <span class="fw-bold text-success fs-4">Rp 1.500.000</span>
+                        <span class="fw-bold text-succes fs-4">Rp 1.500.000</span>
                       </td>
                       <td class="text-center">
                         <span class="badge border border-secondary text-secondary px-3 py-1 fw-semibold">
@@ -233,7 +233,7 @@
                       </td>
                       <td class="text-muted">Piutang Usaha</td>
                       <td class="text-end">
-                        <span class="fw-bold text-success fs-4">Rp 2.000.000</span>
+                        <span class="fw-bold text-succes fs-4">Rp 2.000.000</span>
                       </td>
                       <td class="text-center">
                         <span class="badge border border-secondary text-secondary px-3 py-1 fw-semibold">
@@ -259,7 +259,7 @@
                       </td>
                       <td class="text-muted">Simpanan Wajib</td>
                       <td class="text-end">
-                        <span class="fw-bold text-success fs-4">Rp 3.200.000</span>
+                        <span class="fw-bold text-succes fs-4">Rp 3.200.000</span>
                       </td>
                       <td class="text-center">
                         <span class="badge border border-secondary text-secondary px-3 py-1 fw-semibold">
@@ -285,7 +285,7 @@
                       </td>
                       <td class="text-muted">Kas Transfer</td>
                       <td class="text-end">
-                        <span class="fw-bold text-success fs-4">Rp 7.500.000</span>
+                        <span class="fw-bold text-succes fs-4">Rp 7.500.000</span>
                       </td>
                       <td class="text-center">
                         <span class="badge border border-secondary text-secondary px-3 py-1 fw-semibold">
@@ -297,9 +297,9 @@
                   </tbody>
                   <tfoot>
                     <tr class="table-light">
-                      <td colspan="7" class="text-end fw-bolder fs-4 ">Total Pemasukan:</td>
+                      <td colspan="7" class="text-end fw-bolder fs-4 ">Total Pengeluaran:</td>
                       <td class="text-end">
-                        <span class="fw-bold text-success fs-4 fw-bolder">Rp 19.200.000</span>
+                        <span class="fw-bold text-succes fs-4 fw-bolder">Rp 19.200.000</span>
                       </td>
                       <td></td>
                     </tr>
@@ -313,7 +313,7 @@
           <div class="py-6 px-6 text-center mt-4">
             <p class="mb-0 fs-4">Sistem Koperasi <strong>Akeno Multimedia Solution</strong> &copy; 2025</p>
           </div>
-          
+
         </div>
       </div>
     </div>
@@ -324,11 +324,11 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalTitle">Tambah Data Pemasukan</h5>
+          <h5 class="modal-title" id="modalTitle">Tambah Data Pengeluaran</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
-          <form id="formPemasukan">
+          <form id="formPengeluaran">
             <div class="mb-3">
               <label class="form-label">Tanggal Transaksi <span class="text-danger">*</span></label>
               <input type="datetime-local" class="form-control" id="tglTransaksi" required>
@@ -344,25 +344,40 @@
               <label class="form-label">Keterangan</label>
               <input type="text" class="form-control" id="keterangan" placeholder="Masukkan keterangan">
             </div>
-
             <div class="mb-3">
-              <label class="form-label">Dari Akun <span class="text-danger">*</span></label>
-              <select class="form-select" id="dariAkun" name="akun_id" required>
-                <option value="">-- Pilih Jenis Akun --</option>
-                <option value="1">Piutang Usaha</option>
-                <option value="2">Aktiva Tetap Lainnya</option>
-                <option value="3">Utang Usaha</option>
-                <option value="4">Utang Pajak</option>
-                <option value="5">Utang Bank</option>
-                <option value="6">Modal Awal</option>
-                <option value="7">Modal Sumbangan</option>
-                <option value="8">Modal Cadangan</option>
-                <option value="9">Pendapatan Lainnya</option>
-                <option value="10">Permisalan</option>
-                <option value="11">Transaksi</option>
+              <label class="form-label">Dari Kas <span class="text-danger">*</span></label>
+              <select class="form-select" id="dariKas" required>
+                <option value="">-- Pilih Kas --</option>
+                <option value="1">Kas Tunai</option>
+                <option value="2">Kas Besar</option>
+                <option value="3">Transfer</option>
               </select>
             </div>
-
+            <div class="mb-3">
+              <label class="form-label">Untuk Akun <span class="text-danger">*</span></label>
+              <select class="form-select" id="untukAkun" name="akun_id" required>
+                <option value="">-- Pilih Jenis Akun --</option>
+                <option value="5">Piutang Usaha</option>
+                <option value="9">Persediaan Barang</option>
+                <option value="10">Biaya Dibayar Dimuka</option>
+                <option value="11">Perlengkapan Usaha</option>
+                <option value="18">Peralatan Kantor</option>
+                <option value="19">Inventaris Kendaraan</option>
+                <option value="20">Mesin</option>
+                <option value="29">Utang Usaha</option>
+                <option value="33">Utang Pajak</option>
+                <option value="37">Utang Bank</option>
+                <option value="42">Modal Awal</option>
+                <option value="44">Modal Sumbangan</option>
+                <option value="45">Modal Cadangan</option>
+                <option value="52">Beban Gaji Karyawan</option>
+                <option value="53">Biaya Listrik dan Air</option>
+                <option value="54">Biaya Transportasi</option>
+                <option value="60">Biaya Lainnya</option>
+                <option value="111">Permisalan</option>
+                <option value="112">Transaksi</option>
+              </select>
+            </div>
           </form>
         </div>
         <div class="modal-footer">
@@ -375,9 +390,7 @@
     </div>
   </div>
 
-
-
-
+  <!-- Scripts -->
   <script src="./assets/libs/jquery/dist/jquery.min.js"></script>
   <script src="./assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="./assets/js/sidebarmenu.js"></script>
@@ -401,76 +414,78 @@
         .then(res => res.text())
         .then(html => {
           document.getElementById("sidebar-container").innerHTML = html;
-
-          // ⬇️ LOAD JS SETELAH SIDEBAR MASUK DOM
           loadScript("./assets/js/sidebarmenu.js");
           loadScript("./assets/js/app.min.js");
         });
-    });
 
-    function loadScript(src) {
-      const script = document.createElement("script");
-      script.src = src;
-      document.body.appendChild(script);
-    }
+      // PERBAIKAN: Sembunyikan tabel dulu, tampilkan setelah DataTable siap
+      const tableWrapper = document.querySelector('#tabelPengeluaran').closest('.card-body');
+      tableWrapper.style.opacity = '0';
+      tableWrapper.style.transition = 'opacity 0.3s';
 
-    // ⬇️ INIT DATATABLE SETELAH SIDEBAR MASUK
-    $('#tabelPemasukan').DataTable({
-      language: {
-        url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/id.json'
-      },
-      pageLength: 10,
-      order: [[3, 'desc']],
-      columnDefs: [
-        { orderable: false, targets: [0, 1] },
-        {
-          targets: 1,
-          render: function (data, type, row, meta) {
-            return meta.row + 1;
+      // Initialize DataTable
+      const table = $('#tabelPengeluaran').DataTable({
+        language: {
+          url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/id.json'
+        },
+        pageLength: 10,
+        order: [[3, 'desc']], // Sort by Tanggal (index 3)
+        columnDefs: [
+          {
+            orderable: false,
+            targets: [0, 1] // Checkbox dan Nomor tidak bisa di-sort
+          },
+          {
+            targets: 1, // Kolom Nomor
+            render: function (data, type, row, meta) {
+              return meta.row + meta.settings._iDisplayStart + 1; // Nomor pagination-aware
+            }
           }
+        ],
+        initComplete: function () {
+          // PERBAIKAN: Tampilkan tabel setelah DataTable selesai render
+          tableWrapper.style.opacity = '1';
         }
-      ]
-    });
-
-
-    function loadScript(src) {
-      const script = document.createElement("script");
-      script.src = src;
-      document.body.appendChild(script);
-    }
-
-    // Click row to select checkbox
-    $('#tabelPemasukan tbody').on('click', 'tr', function (e) {
-      if ($(e.target).is('input[type="checkbox"]')) {
-        e.stopPropagation();
-        updateSelectAllState();
-        return;
-      }
-
-      const checkbox = $(this).find('.row-checkbox');
-      checkbox.prop('checked', !checkbox.prop('checked'));
-      updateSelectAllState();
-    });
-
-    // Fix checkbox styling
-    setTimeout(() => {
-      const theadCheckbox = document.getElementById('selectAll');
-      if (theadCheckbox) {
-        theadCheckbox.style.backgroundColor = 'white';
-        theadCheckbox.style.borderColor = '#495057';
-        theadCheckbox.style.accentColor = '#0d6efd';
-        theadCheckbox.style.width = '18px';
-        theadCheckbox.style.height = '18px';
-        theadCheckbox.style.cursor = 'pointer';
-      }
-
-      document.querySelectorAll('.row-checkbox').forEach(cb => {
-        cb.style.cursor = 'pointer';
-        cb.style.width = '18px';
-        cb.style.height = '18px';
-        cb.style.accentColor = '#0d6efd';
       });
-    }, 100);
+
+      // Redraw setelah pagination untuk update nomor
+      table.on('draw', function () {
+        updateSelectAllState();
+      });
+
+      // Click row to select checkbox
+      $('#tabelPengeluaran tbody').on('click', 'tr', function (e) {
+        if ($(e.target).is('input[type="checkbox"]')) {
+          e.stopPropagation();
+          updateSelectAllState();
+          return;
+        }
+
+        const checkbox = $(this).find('.row-checkbox');
+        checkbox.prop('checked', !checkbox.prop('checked'));
+        updateSelectAllState();
+      });
+
+      // Fix checkbox styling
+      setTimeout(() => {
+        const theadCheckbox = document.getElementById('selectAll');
+        if (theadCheckbox) {
+          theadCheckbox.style.backgroundColor = 'white';
+          theadCheckbox.style.borderColor = '#495057';
+          theadCheckbox.style.accentColor = '#0d6efd';
+          theadCheckbox.style.width = '18px';
+          theadCheckbox.style.height = '18px';
+          theadCheckbox.style.cursor = 'pointer';
+        }
+
+        document.querySelectorAll('.row-checkbox').forEach(cb => {
+          cb.style.cursor = 'pointer';
+          cb.style.width = '18px';
+          cb.style.height = '18px';
+          cb.style.accentColor = '#0d6efd';
+        });
+      }, 100);
+    });
 
     function loadScript(src) {
       const script = document.createElement("script");
@@ -506,8 +521,8 @@
       const modalElement = document.getElementById('modalForm');
       if (!modalElement) return;
 
-      document.getElementById('modalTitle').innerText = 'Tambah Data Pemasukan';
-      document.getElementById('formPemasukan').reset();
+      document.getElementById('modalTitle').innerText = 'Tambah Data Pengeluaran';
+      document.getElementById('formPengeluaran').reset();
 
       const now = new Date();
       document.getElementById('tglTransaksi').value = now.toISOString().slice(0, 16);
@@ -536,7 +551,7 @@
         return;
       }
 
-      document.getElementById('modalTitle').textContent = 'Edit Data Pemasukan';
+      document.getElementById('modalTitle').textContent = 'Edit Data Pengeluaran';
 
       const row = checked[0].closest('tr');
 
@@ -557,9 +572,9 @@
       if (confirm('Apakah Anda yakin ingin menghapus ' + checked.length + ' data?')) {
         checked.forEach(checkbox => {
           const row = checkbox.closest('tr');
-          $('#tabelPemasukan').DataTable().row(row).remove();
+          $('#tabelPengeluaran').DataTable().row(row).remove();
         });
-        $('#tabelPemasukan').DataTable().draw();
+        $('#tabelPengeluaran').DataTable().draw();
 
         alert('Data berhasil dihapus!');
         document.getElementById('selectAll').checked = false;
@@ -567,7 +582,7 @@
     }
 
     function simpanData() {
-      const form = document.getElementById('formPemasukan');
+      const form = document.getElementById('formPengeluaran');
       if (!form.checkValidity()) {
         form.reportValidity();
         return;
@@ -583,13 +598,13 @@
 
     function cariData() {
       const search = document.getElementById('searchInput').value;
-      $('#tabelPemasukan').DataTable().search(search).draw();
+      $('#tabelPengeluaran').DataTable().search(search).draw();
     }
 
     function resetFilter() {
       document.getElementById('searchInput').value = '';
       document.getElementById('filterTanggal').value = '';
-      $('#tabelPemasukan').DataTable().search('').draw();
+      $('#tabelPengeluaran').DataTable().search('').draw();
     }
 
     function cetakLaporan() {
