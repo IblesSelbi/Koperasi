@@ -1,0 +1,886 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bayar Angsuran - Sistem Koperasi Bina Tirta Lestari</title>
+  <link rel="shortcut icon" type="image/png" href="./assets/images/logos/favicon.png" />
+  <link rel="stylesheet" href="./assets/css/styles.min.css" />
+  <!-- DataTables CSS -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.bootstrap5.min.css">
+</head>
+
+<body>
+  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    data-sidebar-position="fixed" data-header-position="fixed">
+
+    <!-- App Topstrip -->
+    <div class="app-topstrip bg-dark py-6 px-3 w-100 d-lg-flex align-items-center justify-content-between">
+      <div class="d-flex align-items-center justify-content-center gap-5 mb-2 mb-lg-0">
+        <a class="d-flex justify-content-center" href="#">
+          <img src="assets/images/logos/logo-wrappixel.svg" alt="" width="150" height="37">
+        </a>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main wrapper -->
+    <div class="body-wrapper">
+      <!-- Header Start -->
+      <header class="app-header shadow-sm">
+        <nav class="navbar navbar-expand-lg navbar-light">
+          <ul class="navbar-nav">
+            <li class="nav-item d-block d-xl-none">
+              <a class="nav-link sidebartoggler" id="headerCollapse" href="javascript:void(0)">
+                <i class="ti ti-menu-2"></i>
+              </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link position-relative" href="javascript:void(0)" id="drop1" data-bs-toggle="dropdown">
+                <i class="ti ti-bell fs-7"></i>
+                <span class="position-absolute top-0 end-0 badge rounded-pill bg-danger" style="font-size:11px">3</span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-animate-up" style="min-width: 320px;">
+                <div class="px-3 py-2 bg-light border-bottom">
+                  <h6 class="mb-0">Notifikasi Jatuh Tempo</h6>
+                </div>
+                <a href="javascript:void(0)" class="dropdown-item border-bottom py-3">
+                  <div class="d-flex align-items-start">
+                    <i class="ti ti-alert-circle fs-5 text-warning"></i>
+                    <div class="ms-2">
+                      <h6 class="mb-1 fw-semibold">Hartati</h6>
+                      <p class="mb-1 fs-2 text-muted">Jatuh tempo: 16 Jun 2025</p>
+                      <span class="badge bg-danger-subtle text-danger">Sisa: Rp 1.575.000</span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </li>
+          </ul>
+          <div class="navbar-collapse justify-content-end px-0">
+            <ul class="navbar-nav flex-row ms-auto align-items-center">
+              <li class="nav-item me-3">
+                <span class="text-dark">
+                  <i class="ti ti-calendar"></i> <span id="tanggal">17 December 2025</span>
+                  <i class="ti ti-clock ms-2"></i> <span id="jam">00:00:00</span>
+                </span>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link" href="javascript:void(0)" data-bs-toggle="dropdown">
+                  <img src="./assets/images/profile/user-1.jpg" width="35" height="35" class="rounded-circle">
+                </a>
+                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up">
+                  <a href="#" class="dropdown-item"><i class="ti ti-user"></i> Profil Saya</a>
+                  <a href="#" class="dropdown-item"><i class="ti ti-key"></i> Ubah Password</a>
+                  <a href="#" class="btn btn-outline-primary mx-2 mt-2 d-block">Logout</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+
+      <div class="body-wrapper-inner">
+        <div class="container-fluid">
+          <!-- Page Header -->
+          <div class="row mb-3">
+            <div class="col-12">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h4 class="fw-semibold mb-1">Pembayaran Angsuran Pinjaman</h4>
+                  <p class="text-muted fs-3 mb-0">Kelola pembayaran angsuran pinjaman anggota</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Toolbar Card -->
+          <div class="card mb-3 shadow-sm">
+            <div class="card-header bg-light border-bottom">
+              <h6 class="mb-0 fw-semibold"><i class="ti ti-filter me-2"></i>Filter & Pencarian Data</h6>
+            </div>
+            <div class="card-body p-4">
+              <div class="row g-3">
+                <!-- Filter Tanggal -->
+                <div class="col-md-6 col-lg-4">
+                  <label class="form-label fw-semibold mb-2">
+                    <i class="ti ti-calendar text-primary"></i> Rentang Tanggal Pinjam
+                  </label>
+                  <input type="text" class="form-control" id="filterTanggal" 
+                         placeholder="Pilih tanggal..." readonly>
+                </div>
+                
+                <!-- Kode Transaksi -->
+                <div class="col-md-6 col-lg-3">
+                  <label class="form-label fw-semibold mb-2">
+                    <i class="ti ti-barcode text-info"></i> Kode Transaksi
+                  </label>
+                  <input type="text" class="form-control" id="filterKode" 
+                         placeholder="Masukkan kode...">
+                </div>
+                
+                <!-- Nama Anggota -->
+                <div class="col-md-6 col-lg-3">
+                  <label class="form-label fw-semibold mb-2">
+                    <i class="ti ti-user text-warning"></i> Nama Anggota
+                  </label>
+                  <input type="text" class="form-control" id="filterNama" 
+                         placeholder="Nama anggota...">
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="col-md-6 col-lg-2">
+                  <label class="form-label fw-semibold mb-2 d-none d-lg-block">&nbsp;</label>
+                  <div class="d-flex gap-2">
+                    <button class="btn btn-primary w-100" onclick="filterData()">
+                      <i class="ti ti-search"></i> Cari
+                    </button>
+                    <button class="btn btn-outline-secondary" onclick="resetFilter()" 
+                            data-bs-toggle="tooltip" title="Reset Filter">
+                      <i class="ti ti-refresh"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Secondary Actions -->
+              <div class="row mt-3 pt-3 border-top">
+                <div class="col-12">
+                  <div class="d-flex gap-2 flex-wrap align-items-center">
+                    <span class="badge bg-info-subtle text-info rounded-2 border px-3 py-2">
+                      <i class="ti ti-info-circle"></i> Klik tombol "Bayar" untuk memproses pembayaran angsuran
+                    </span>
+                    <div class="ms-auto">
+                      <span class="badge bg-primary-subtle text-primary px-3 py-2">
+                        <i class="ti ti-file-text"></i> Total Data: <strong id="totalData">3</strong>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Data Table Card -->
+          <div class="card">
+            <div class="card-body">
+              <div class="table-responsive">
+                <table id="tabelAngsuran" class="table table-hover align-middle rounded-2 border overflow-hidden"
+                  style="width:100%">
+                  <thead class="table-primary">
+                    <tr>
+                      <th class="text-center align-middle">Kode</th>
+                      <th width="100px" class="text-center align-middle">Tanggal<br>Pinjam</th>
+                      <th class="text-center align-middle">ID<br>Anggota</th>
+                      <th width="200px" class="align-middle">Nama Anggota</th>
+                      <th class="text-end align-middle">Pokok<br>Pinjaman</th>
+                      <th class="text-center align-middle">Lama<br>Pinjam</th>
+                      <th class="text-end align-middle">Angsuran<br>Pokok</th>
+                      <th class="text-end align-middle">Bunga<br>Angsuran</th>
+                      <th class="text-end align-middle">Biaya<br>Admin</th>
+                      <th class="text-end align-middle">Angsuran<br>Per Bulan</th>
+                      <th class="text-center align-middle">Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Sample Data Row 1 - BELUM LUNAS (Highlight Merah) -->
+                    <tr class="table-danger">
+                      <td class="text-center">
+                        <span class="badge bg-primary-subtle text-primary fw-semibold px-2 py-1">PJ001</span>
+                      </td>
+                      <td class="text-center text-muted">15 Des 2025</td>
+                      <td class="text-center">
+                        <span class="badge bg-secondary-subtle text-secondary">001234</span>
+                      </td>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <img src="./assets/images/profile/user-2.jpg" width="40" height="40" class="rounded-circle me-2">
+                          <div>
+                            <strong>Budi Santoso</strong><br>
+                            <small class="text-muted">Jakarta</small>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="text-end">
+                        <span class="fw-bold">Rp 10.000.000</span>
+                      </td>
+                      <td class="text-center">
+                        <span class="badge bg-info-subtle text-info">12 Bulan</span>
+                      </td>
+                      <td class="text-end fw-bold">Rp 833.333</td>
+                      <td class="text-end text-info fw-bold">Rp 50.000</td>
+                      <td class="text-end fw-bold text-warning">Rp 100.000</td>
+                      <td class="text-end">
+                        <span class="fw-bold text-success fs-5">Rp 983.333</span>
+                      </td>
+                      <td class="text-center">
+                         <a href="DetailBayarAngsuran.html">
+                            <button class="btn btn-success btn-sm">
+                              <i class="ti ti-cash"></i> Bayar
+                            </button>
+                        </a>
+                      </td>
+                    </tr>
+
+                    <!-- Sample Data Row 2 - BELUM LUNAS (Highlight Merah) -->
+                    <tr class="table-danger">
+                      <td class="text-center">
+                        <span class="badge bg-primary-subtle text-primary fw-semibold px-2 py-1">PJ002</span>
+                      </td>
+                      <td class="text-center text-muted">14 Des 2025</td>
+                      <td class="text-center">
+                        <span class="badge bg-secondary-subtle text-secondary">001235</span>
+                      </td>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <img src="./assets/images/profile/user-3.jpg" width="40" height="40" class="rounded-circle me-2">
+                          <div>
+                            <strong>Siti Aminah</strong><br>
+                            <small class="text-muted">Bandung</small>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="text-end">
+                        <span class="fw-bold">Rp 5.000.000</span>
+                      </td>
+                      <td class="text-center">
+                        <span class="badge bg-info-subtle text-info">6 Bulan</span>
+                      </td>
+                      <td class="text-end fw-bold">Rp 833.333</td>
+                      <td class="text-end fw-bold text-info">Rp 25.000</td>
+                      <td class="text-end fw-bold text-warning">Rp 50.000</td>
+                      <td class="text-end">
+                        <span class="fw-bold text-success fs-5">Rp 908.333</span>
+                      </td>
+                      <td class="text-center">
+                        <a href="DetailBayarAngsuran.html">
+                            <button class="btn btn-success btn-sm">
+                              <i class="ti ti-cash"></i> Bayar
+                            </button>
+                        </a>
+                      </td>
+                    </tr>
+
+                    <!-- Sample Data Row 3 - SUDAH LUNAS (Normal) -->
+                    <tr>
+                      <td class="text-center">
+                        <span class="badge bg-primary-subtle text-primary fw-semibold px-2 py-1">PJ003</span>
+                      </td>
+                      <td class="text-center text-muted">13 Des 2025</td>
+                      <td class="text-center">
+                        <span class="badge bg-secondary-subtle text-secondary">001236</span>
+                      </td>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <img src="./assets/images/profile/user-4.jpg" width="40" height="40" class="rounded-circle me-2">
+                          <div>
+                            <strong>Ahmad Hidayat</strong><br>
+                            <small class="text-muted">Surabaya</small>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="text-end">
+                        <span class="fw-bold">Rp 15.000.000</span>
+                      </td>
+                      <td class="text-center">
+                        <span class="badge bg-info-subtle text-info">24 Bulan</span>
+                      </td>
+                      <td class="text-end">Rp 625.000</td>
+                      <td class="text-end text-info fw-bold">Rp 75.000</td>
+                      <td class="text-end text-warning fw-bold">Rp 150.000</td>
+                      <td class="text-end">
+                        <span class="fw-bold text-success fs-5">Rp 850.000</span>
+                      </td>
+                      <td class="text-center">
+                        <a href="DetailBayarAngsuran.html">
+                            <button class="btn btn-success btn-sm">
+                              <i class="ti ti-cash"></i> Bayar
+                            </button>
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Info Card -->
+          <div class="card mt-3 border-start border border-warning">
+            <div class="card-body">
+              <div class="d-flex align-items-center">
+                <i class="ti ti-info-circle fs-8 text-warning me-3"></i>
+                <div>
+                  <h6 class="mb-1 fw-semibold">Informasi</h6>
+                  <p class="mb-0 text-muted">
+                    • Baris berwarna <strong class="text-danger">merah muda</strong> menunjukkan pinjaman yang belum lunas atau mendekati jatuh tempo<br>
+                    • Klik tombol <strong>"Bayar"</strong> untuk memproses pembayaran angsuran<br>
+                    • Pastikan data pembayaran sudah benar sebelum menyimpan
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Footer -->
+          <div class="py-6 px-6 text-center mt-4">
+            <p class="mb-0 fs-4">Sistem Koperasi <strong>Akeno Multimedia Solution</strong> &copy; 2025</p>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Form Bayar Angsuran -->
+  <div class="modal fade" id="modalBayarAngsuran" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-success text-white">
+          <h5 class="modal-title">
+            <i class="ti ti-cash"></i> Form Pembayaran Angsuran
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Info Pinjaman -->
+          <div class="card bg-light mb-3">
+            <div class="card-body">
+              <h6 class="fw-semibold mb-3"><i class="ti ti-file-invoice"></i> Informasi Pinjaman</h6>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <div class="d-flex align-items-center mb-2">
+                    <img src="./assets/images/profile/user-2.jpg" width="50" height="50" class="rounded-circle me-3">
+                    <div>
+                      <strong class="d-block">Budi Santoso</strong>
+                      <small class="text-muted">ID: 001234 • Jakarta</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="text-md-end">
+                    <span class="badge bg-primary-subtle text-primary px-3 py-2">Kode: PJ001</span>
+                    <br>
+                    <small class="text-muted">Tanggal Pinjam: 15 Des 2025</small>
+                  </div>
+                </div>
+              </div>
+              
+              <hr class="my-3">
+              
+              <div class="row g-2">
+                <div class="col-6">
+                  <small class="text-muted d-block">Pokok Pinjaman</small>
+                  <strong>Rp 10.000.000</strong>
+                </div>
+                <div class="col-6">
+                  <small class="text-muted d-block">Lama Angsuran</small>
+                  <strong>12 Bulan</strong>
+                </div>
+                <div class="col-6">
+                  <small class="text-muted d-block">Angsuran Per Bulan</small>
+                  <strong class="text-success">Rp 983.333</strong>
+                </div>
+                <div class="col-6">
+                  <small class="text-muted d-block">Sisa Angsuran</small>
+                  <strong class="text-danger">5x</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Form Pembayaran -->
+          <form id="formBayar">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Tanggal Bayar <span class="text-danger">*</span></label>
+                <input type="date" class="form-control" id="tglBayar" required>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Angsuran Ke <span class="text-danger">*</span></label>
+                <input type="number" class="form-control" id="angsuranKe" value="8" required>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Jumlah Bayar <span class="text-danger">*</span></label>
+                <div class="input-group">
+                  <span class="input-group-text">Rp</span>
+                  <input type="text" class="form-control" id="jumlahBayar" value="983.333" required>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Denda Keterlambatan</label>
+                <div class="input-group">
+                  <span class="input-group-text">Rp</span>
+                  <input type="text" class="form-control" id="denda" value="0">
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Bayar Ke Kas <span class="text-danger">*</span></label>
+                <select class="form-select" id="kasId" required>
+                  <option value="">-- Pilih Kas --</option>
+                  <option value="1" selected>Kas Tunai</option>
+                  <option value="2">Kas Besar</option>
+                </select>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Status Pembayaran</label>
+                <select class="form-select" id="statusBayar">
+                  <option value="normal" selected>Normal</option>
+                  <option value="pelunasan">Pelunasan Dipercepat</option>
+                </select>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label fw-semibold">Keterangan</label>
+                <textarea class="form-control" id="keteranganBayar" rows="3" placeholder="Tambahkan keterangan pembayaran (opsional)"></textarea>
+              </div>
+            </div>
+
+            <!-- Summary -->
+            <div class="card bg-success-subtle mt-3">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <small class="text-muted d-block">Total Pembayaran</small>
+                    <h4 class="mb-0 text-success fw-bold">Rp 983.333</h4>
+                  </div>
+                  <div class="text-end">
+                    <small class="text-muted d-block">Sisa Setelah Bayar</small>
+                    <h5 class="mb-0 text-danger">Rp 4.916.665</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer bg-light">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            <i class="ti ti-x"></i> Batal
+          </button>
+          <button type="button" class="btn btn-success" onclick="simpanPembayaran()">
+            <i class="ti ti-check"></i> Proses Pembayaran
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="./assets/libs/jquery/dist/jquery.min.js"></script>
+  <script src="./assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./assets/js/sidebarmenu.js"></script>
+  <script src="./assets/js/app.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+
+  <!-- DataTables -->
+  <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- Daterangepicker -->
+  <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+  <script>
+    // Load Sidebar
+    document.addEventListener("DOMContentLoaded", function () {
+      fetch("sidebar.html")
+        .then(res => res.text())
+        .then(html => {
+          document.getElementById("sidebar-container").innerHTML = html;
+          loadScript("./assets/js/sidebarmenu.js");
+          loadScript("./assets/js/app.min.js");
+        });
+    });
+
+    function loadScript(src) {
+      const script = document.createElement("script");
+      script.src = src;
+      document.body.appendChild(script);
+    }
+
+    // Update Jam Real-time
+    function updateJam() {
+      const now = new Date();
+      const jam = now.getHours().toString().padStart(2, '0');
+      const menit = now.getMinutes().toString().padStart(2, '0');
+      const detik = now.getSeconds().toString().padStart(2, '0');
+      document.getElementById('jam').textContent = `${jam}:${menit}:${detik}`;
+    }
+    setInterval(updateJam, 1000);
+    updateJam();
+
+    // Update Tanggal
+    const options = { day: 'numeric', month: 'long', year: 'numeric' };
+    const tanggal = new Date().toLocaleDateString('id-ID', options);
+    document.getElementById('tanggal').textContent = tanggal;
+
+    // Initialize DataTable
+    let table;
+    $(document).ready(function () {
+      table = $('#tabelAngsuran').DataTable({
+        language: {
+          url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/id.json'
+        },
+        pageLength: 10,
+        order: [[1, 'desc']],
+        columnDefs: [
+          { orderable: false, targets: [10] }
+        ]
+      });
+
+      // Initialize Daterangepicker
+      $('#filterTanggal').daterangepicker({
+        autoUpdateInput: false,
+        locale: {
+          cancelLabel: 'Clear',
+          applyLabel: 'Terapkan',
+          cancelLabel: 'Batal',
+          format: 'DD/MM/YYYY'
+        }
+      });
+
+      $('#filterTanggal').on('apply.daterangepicker', function (ev, picker) {
+        $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+      });
+
+      $('#filterTanggal').on('cancel.daterangepicker', function (ev, picker) {
+        $(this).val('');
+      });
+
+      // Auto uppercase untuk kode transaksi
+      $('#filterKode').on('input', function() {
+        $(this).val($(this).val().toUpperCase());
+      });
+
+      // Enter key untuk search
+      $('#filterKode, #filterNama').on('keypress', function(e) {
+        if (e.which === 13) {
+          filterData();
+        }
+      });
+
+      // Set default tanggal bayar
+      const today = new Date().toISOString().split('T')[0];
+      $('#tglBayar').val(today);
+
+      // Format currency on input
+      $('#jumlahBayar, #denda').on('input', function() {
+        let value = $(this).val().replace(/[^0-9]/g, '');
+        if (value) {
+          value = parseInt(value).toLocaleString('id-ID');
+        }
+        $(this).val(value);
+      });
+
+      // Auto calculate total
+      $('#jumlahBayar, #denda').on('input', calculateTotal);
+    });
+
+    // Function: Calculate Total
+    function calculateTotal() {
+      const jumlahBayar = parseInt($('#jumlahBayar').val().replace(/[^0-9]/g, '') || 0);
+      const denda = parseInt($('#denda').val().replace(/[^0-9]/g, '') || 0);
+      const total = jumlahBayar + denda;
+      
+      // Update total pembayaran
+      $('.card.bg-success-subtle .text-success').text('Rp ' + total.toLocaleString('id-ID'));
+      
+      // Calculate sisa (example calculation)
+      const sisaAngsuran = 5; // dari data
+      const angsuranPerBulan = 983333;
+      const sisa = (sisaAngsuran * angsuranPerBulan) - total;
+      $('.card.bg-success-subtle .text-danger').text('Rp ' + sisa.toLocaleString('id-ID'));
+    }
+
+    // Function: Bayar Angsuran
+    function bayarAngsuran(id) {
+      // Reset form
+      $('#formBayar')[0].reset();
+      
+      // Set default values
+      const today = new Date().toISOString().split('T')[0];
+      $('#tglBayar').val(today);
+      $('#angsuranKe').val(8);
+      $('#jumlahBayar').val('983.333');
+      $('#denda').val('0');
+      $('#kasId').val('1');
+      $('#statusBayar').val('normal');
+      
+      // Calculate total
+      calculateTotal();
+      
+      // Show modal
+      $('#modalBayarAngsuran').modal('show');
+      
+      // Store current ID
+      $('#modalBayarAngsuran').data('currentId', id);
+    }
+
+    // Function: Simpan Pembayaran
+    function simpanPembayaran() {
+      // Validasi form
+      const tglBayar = $('#tglBayar').val();
+      const angsuranKe = $('#angsuranKe').val();
+      const jumlahBayar = $('#jumlahBayar').val();
+      const kasId = $('#kasId').val();
+
+      if (!tglBayar) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Peringatan!',
+          text: 'Tanggal bayar harus diisi',
+          confirmButtonColor: '#3085d6'
+        });
+        $('#tglBayar').focus();
+        return;
+      }
+
+      if (!angsuranKe || angsuranKe <= 0) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Peringatan!',
+          text: 'Angsuran ke harus diisi dengan benar',
+          confirmButtonColor: '#3085d6'
+        });
+        $('#angsuranKe').focus();
+        return;
+      }
+
+      if (!jumlahBayar || jumlahBayar <= 0) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Peringatan!',
+          text: 'Jumlah bayar harus diisi',
+          confirmButtonColor: '#3085d6'
+        });
+        $('#jumlahBayar').focus();
+        return;
+      }
+
+      if (!kasId) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Peringatan!',
+          text: 'Kas harus dipilih',
+          confirmButtonColor: '#3085d6'
+        });
+        $('#kasId').focus();
+        return;
+      }
+
+      // Konfirmasi pembayaran
+      const totalBayar = parseInt($('#jumlahBayar').val().replace(/[^0-9]/g, ''));
+      const denda = parseInt($('#denda').val().replace(/[^0-9]/g, '') || 0);
+      const total = totalBayar + denda;
+
+      Swal.fire({
+        title: 'Konfirmasi Pembayaran',
+        html: `
+          <div class="text-start">
+            <p class="mb-3">Pastikan data pembayaran sudah benar:</p>
+            <table class="table table-sm">
+              <tr>
+                <td>Angsuran Ke</td>
+                <td><strong>${angsuranKe}</strong></td>
+              </tr>
+              <tr>
+                <td>Jumlah Bayar</td>
+                <td><strong>Rp ${totalBayar.toLocaleString('id-ID')}</strong></td>
+              </tr>
+              <tr>
+                <td>Denda</td>
+                <td><strong>Rp ${denda.toLocaleString('id-ID')}</strong></td>
+              </tr>
+              <tr class="table-success">
+                <td><strong>Total Pembayaran</strong></td>
+                <td><strong class="text-success">Rp ${total.toLocaleString('id-ID')}</strong></td>
+              </tr>
+            </table>
+          </div>
+        `,
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: '<i class="ti ti-check"></i> Ya, Proses',
+        cancelButtonText: '<i class="ti ti-x"></i> Batal',
+        confirmButtonColor: '#198754',
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-secondary'
+        }
+      }).then((result) => {
+        if (result.isConfirmed) {
+          prosesPembayaran();
+        }
+      });
+    }
+
+    // Function: Proses Pembayaran
+    function prosesPembayaran() {
+      Swal.fire({
+        title: 'Memproses Pembayaran...',
+        text: 'Mohon tunggu sebentar',
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        willOpen: () => {
+          Swal.showLoading();
+        }
+      });
+
+      // Simulate AJAX
+      setTimeout(() => {
+        $('#modalBayarAngsuran').modal('hide');
+        
+        Swal.fire({
+          icon: 'success',
+          title: 'Pembayaran Berhasil!',
+          html: `
+            <div class="text-start">
+              <p>Pembayaran angsuran telah berhasil diproses.</p>
+              <div class="alert alert-info mt-3">
+                <i class="ti ti-info-circle"></i> Silakan cetak bukti pembayaran untuk arsip
+              </div>
+            </div>
+          `,
+          showCancelButton: true,
+          confirmButtonText: '<i class="ti ti-printer"></i> Cetak Bukti',
+          cancelButtonText: 'Tutup',
+          confirmButtonColor: '#0d6efd'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            cetakBukti();
+          }
+        });
+
+        // Refresh table
+        if (table) {
+          // table.ajax.reload(null, false);
+        }
+
+        /* Production AJAX:
+        $.ajax({
+          url: 'bayar/proses',
+          type: 'POST',
+          data: {
+            id: $('#modalBayarAngsuran').data('currentId'),
+            tgl_bayar: $('#tglBayar').val(),
+            angsuran_ke: $('#angsuranKe').val(),
+            jumlah_bayar: $('#jumlahBayar').val().replace(/[^0-9]/g, ''),
+            denda: $('#denda').val().replace(/[^0-9]/g, ''),
+            kas_id: $('#kasId').val(),
+            status: $('#statusBayar').val(),
+            keterangan: $('#keteranganBayar').val()
+          },
+          success: function(response) {
+            if(response.success) {
+              $('#modalBayarAngsuran').modal('hide');
+              Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: 'Pembayaran angsuran berhasil diproses',
+                timer: 2000
+              });
+              table.ajax.reload();
+            } else {
+              Swal.fire({
+                icon: 'error',
+                title: 'Gagal!',
+                text: response.message || 'Terjadi kesalahan'
+              });
+            }
+          },
+          error: function() {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error!',
+              text: 'Tidak dapat terhubung ke server'
+            });
+          }
+        });
+        */
+      }, 1500);
+    }
+
+    // Function: Cetak Bukti
+    function cetakBukti() {
+      const id = $('#modalBayarAngsuran').data('currentId');
+      const url = `cetak_bukti_bayar.php?id=${id}`;
+      window.open(url, '_blank');
+    }
+
+    // Function: Filter Data
+    function filterData() {
+      const kode = $('#filterKode').val();
+      const nama = $('#filterNama').val();
+      const tanggal = $('#filterTanggal').val();
+
+      console.log('Filter:', { kode, nama, tanggal });
+
+      Swal.fire({
+        title: 'Memproses...',
+        text: 'Sedang menerapkan filter',
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        willOpen: () => {
+          Swal.showLoading();
+        }
+      });
+
+      setTimeout(() => {
+        Swal.close();
+        Swal.fire({
+          icon: 'success',
+          title: 'Filter Diterapkan!',
+          text: 'Data berhasil difilter',
+          timer: 1500,
+          showConfirmButton: false
+        });
+
+        // In production, reload table with filters
+        // table.ajax.reload();
+      }, 800);
+    }
+
+    // Function: Reset Filter
+    function resetFilter() {
+      $('#filterKode').val('');
+      $('#filterNama').val('');
+      $('#filterTanggal').val('');
+
+      if (table) {
+        table.search('').draw();
+      }
+
+      Swal.fire({
+        icon: 'info',
+        title: 'Filter Direset',
+        text: 'Semua filter telah dikembalikan',
+        timer: 1500,
+        showConfirmButton: false
+      });
+    }
+
+    // Initialize Bootstrap Tooltips
+    document.addEventListener('DOMContentLoaded', function () {
+      const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+      tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+      });
+    });
+  </script>
+
+</body>
+
+</html>
