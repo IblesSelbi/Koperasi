@@ -1,0 +1,844 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kredit Macet - Sistem Koperasi Bina Tirta Lestari</title>
+    <link rel="shortcut icon" type="image/png" href="./assets/images/logos/favicon.png" />
+    <link rel="stylesheet" href="./assets/css/styles.min.css" />
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.bootstrap5.min.css">
+</head>
+
+<body>
+    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+        data-sidebar-position="fixed" data-header-position="fixed">
+
+        <!-- App Topstrip -->
+        <div class="app-topstrip bg-dark py-6 px-3 w-100 d-lg-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center justify-content-center gap-5 mb-2 mb-lg-0">
+                <a class="d-flex justify-content-center" href="#">
+                    <img src="assets/images/logos/logo-wrappixel.svg" alt="" width="150" height="37">
+                </a>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div id="sidebar-container"></div>
+
+        <!-- Main wrapper -->
+        <div class="body-wrapper">
+            <!-- Header Start -->
+            <header class="app-header shadow-sm">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <ul class="navbar-nav">
+                        <li class="nav-item d-block d-xl-none">
+                            <a class="nav-link sidebartoggler" id="headerCollapse" href="javascript:void(0)">
+                                <i class="ti ti-menu-2"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link position-relative" href="javascript:void(0)" id="drop1"
+                                data-bs-toggle="dropdown">
+                                <i class="ti ti-bell fs-7"></i>
+                                <span class="position-absolute top-0 end-0 badge rounded-pill bg-danger"
+                                    style="font-size:11px">3</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-animate-up" style="min-width: 320px;">
+                                <div class="px-3 py-2 bg-light border-bottom">
+                                    <h6 class="mb-0">Notifikasi Jatuh Tempo</h6>
+                                </div>
+                                <a href="javascript:void(0)" class="dropdown-item border-bottom py-3">
+                                    <div class="d-flex align-items-start">
+                                        <i class="ti ti-alert-circle fs-5 text-warning"></i>
+                                        <div class="ms-2">
+                                            <h6 class="mb-1 fw-semibold">Hartati</h6>
+                                            <p class="mb-1 fs-2 text-muted">Jatuh tempo: 16 Jun 2025</p>
+                                            <span class="badge bg-danger-subtle text-danger">Sisa: Rp 1.575.000</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="navbar-collapse justify-content-end px-0">
+                        <ul class="navbar-nav flex-row ms-auto align-items-center">
+                            <li class="nav-item me-3">
+                                <span class="text-dark">
+                                    <i class="ti ti-calendar"></i> <span id="tanggal">18 December 2025</span>
+                                    <i class="ti ti-clock ms-2"></i> <span id="jam">00:00:00</span>
+                                </span>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" href="javascript:void(0)" data-bs-toggle="dropdown">
+                                    <img src="./assets/images/profile/user-1.jpg" width="35" height="35"
+                                        class="rounded-circle">
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up">
+                                    <a href="#" class="dropdown-item"><i class="ti ti-user"></i> Profil Saya</a>
+                                    <a href="#" class="dropdown-item"><i class="ti ti-key"></i> Ubah Password</a>
+                                    <a href="#" class="btn btn-outline-primary mx-2 mt-2 d-block">Logout</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+
+            <div class="body-wrapper-inner">
+                <div class="container-fluid">
+                    <!-- Page Header -->
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h4 class="fw-semibold mb-1">Laporan Kredit Macet</h4>
+                                    <p class="text-muted fs-3 mb-0">Data pinjaman yang mengalami kemacetan pembayaran
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Toolbar Card -->
+                    <div class="card mb-3 shadow-sm">
+                        <div class="card-header bg-light border-bottom">
+                            <h6 class="mb-0 fw-semibold"><i class="ti ti-filter me-2"></i>Filter Periode</h6>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="row g-3">
+                                <!-- Filter Periode -->
+                                <div class="col-md-6 col-lg-3">
+                                    <label class="form-label fw-semibold mb-2">
+                                        <i class="ti ti-calendar text-primary"></i> Pilih Periode
+                                    </label>
+                                    <input type="month" class="form-control" id="filterPeriode" value="2025-12">
+                                </div>
+
+                                <!-- Action Buttons -->
+                                <div class="col-md-6 col-lg-3">
+                                    <label class="form-label fw-semibold mb-2 d-none d-lg-block">&nbsp;</label>
+                                    <div class="d-flex gap-2">
+                                        <button class="btn btn-primary w-100" onclick="filterData()">
+                                            <i class="ti ti-search"></i> Tampilkan
+                                        </button>
+                                        <button class="btn btn-outline-secondary" onclick="resetFilter()"
+                                            data-bs-toggle="tooltip" title="Reset Filter">
+                                            <i class="ti ti-refresh"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Info Summary -->
+                                <div class="col-12 col-lg-6">
+                                    <label class="form-label fw-semibold mb-2 d-none d-lg-block">&nbsp;</label>
+                                    <div class="d-flex gap-2 flex-wrap justify-content-lg-end">
+                                        <span class="badge bg-danger-subtle text-danger shadow-sm px-3 py-2">
+                                            <i class="ti ti-alert-triangle"></i> Total Tagihan:
+                                            <strong id="totalTagihan">Rp 45.610.200</strong>
+                                        </span>
+                                        <span class="badge bg-warning-subtle text-warning shadow-sm px-3 py-2">
+                                            <i class="ti ti-exclamation-circle"></i> Sisa Tagihan:
+                                            <strong id="sisaTagihan">Rp 41.940.600</strong>
+                                        </span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- Secondary Actions -->
+                            <div class="row mt-3 pt-3 border-top">
+                                <div class="col-12">
+                                    <div class="d-flex gap-2 flex-wrap align-items-center">
+                                        <button class="btn btn-info btn-sm" onclick="cetakLaporan()">
+                                            <i class="ti ti-printer"></i> Cetak Laporan
+                                        </button>
+                                        <button class="btn btn-success btn-sm" onclick="exportExcel()">
+                                            <i class="ti ti-file-spreadsheet"></i> Export Excel
+                                        </button>
+                                        <button class="btn btn-danger btn-sm" onclick="kirimPemanggilan()">
+                                            <i class="ti ti-mail"></i> Kirim Surat Pemanggilan
+                                        </button>
+                                        <button class="btn btn-warning btn-sm" onclick="tindakLanjut()">
+                                            <i class="ti ti-clipboard-check"></i> Tindak Lanjut
+                                        </button>
+
+                                        <span
+                                            class="badge bg-info-subtle text-info shadow-sm border-2 px-3 py-2 ms-auto">
+                                            <i class="ti ti-alert-octagon"></i> Total Macet:
+                                            <strong id="totalData">3</strong> Anggota
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Period Info -->
+                    <div class="alert alert-danger d-flex align-items-center mb-3" role="alert">
+                        <i class="ti ti-alert-triangle fs-5 me-2"></i>
+                        <div>
+                            <strong>Periode:</strong> <span id="periodeText">Desember 2025</span> |
+                            <strong>Status:</strong> <span class="badge bg-danger ms-2">KREDIT MACET</span>
+                        </div>
+                    </div>
+
+                    <!-- Data Table Card -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive shadow-sm">
+                                <table id="tabelKreditMacet"
+                                    class="table table-hover align-middle rounded-2 border-1 overflow-hidden"
+                                    style="width:100%">
+                                    <thead class="table-primary">
+                                        <tr>
+                                            <th class="text-center align-middle" style="width: 5%;">No</th>
+                                            <th class="text-center align-middle" style="width: 10%;">Kode Pinjam</th>
+                                            <th class="align-middle" style="width: 15%;">Nama Anggota</th>
+                                            <th class="text-center align-middle" style="width: 12%;">Tanggal Pinjam</th>
+                                            <th class="text-center align-middle" style="width: 12%;">Tanggal Tempo</th>
+                                            <th class="text-center align-middle" style="width: 10%;">Lama Pinjam</th>
+                                            <th class="text-end align-middle" style="width: 12%;">Jumlah Tagihan</th>
+                                            <th class="text-end align-middle" style="width: 12%;">Dibayar</th>
+                                            <th class="text-end align-middle" style="width: 15%;">Sisa Tagihan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Sample Data Row 1 -->
+                                        <tr>
+                                            <td class="text-center align-middle">
+                                                <span class="fw-semibold">1</span>
+                                            </td>
+                                            <td class="text-center align-middle">
+                                                <span
+                                                    class="badge bg-danger-subtle text-danger fw-semibold px-2 py-1">TPJ00017</span>
+                                            </td>
+                                            <td class="align-middle">
+                                                <div>
+                                                    <strong class="text-dark">hartati</strong><br>
+                                                    <small class="text-muted">ID: har</small>
+                                                </div>
+                                            </td>
+                                            <td class="text-center align-middle">
+                                                <span class="text-muted">16 Mei 2025</span>
+                                            </td>
+                                            <td class="text-center align-middle">
+                                                <span class="badge bg-danger px-2 py-1">
+                                                    <i class="ti ti-alert-triangle"></i> 16 Jun 2025
+                                                </span>
+                                            </td>
+                                            <td class="text-center align-middle">
+                                                <span class="badge bg-secondary-subtle text-secondary">1 Bulan</span>
+                                            </td>
+                                            <td class="text-end align-middle">
+                                                <strong class="text-danger">Rp 1.575.000</strong>
+                                            </td>
+                                            <td class="text-end align-middle">
+                                                <span class="text-muted">Rp 0</span>
+                                            </td>
+                                            <td class="text-end align-middle">
+                                                <strong class="text-danger fs-5">Rp 1.575.000</strong>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Sample Data Row 2 -->
+                                        <tr>
+                                            <td class="text-center align-middle">
+                                                <span class="fw-semibold">2</span>
+                                            </td>
+                                            <td class="text-center align-middle">
+                                                <span
+                                                    class="badge bg-danger-subtle text-danger fw-semibold px-2 py-1">TPJ00006</span>
+                                            </td>
+                                            <td class="align-middle">
+                                                <div>
+                                                    <strong class="text-dark">Cahyadi</strong><br>
+                                                    <small class="text-muted">ID: cahyadi001</small>
+                                                </div>
+                                            </td>
+                                            <td class="text-center align-middle">
+                                                <span class="text-muted">24 Jun 2024</span>
+                                            </td>
+                                            <td class="text-center align-middle">
+                                                <span class="badge bg-danger px-2 py-1">
+                                                    <i class="ti ti-alert-triangle"></i> 24 Jun 2025
+                                                </span>
+                                            </td>
+                                            <td class="text-center align-middle">
+                                                <span class="badge bg-secondary-subtle text-secondary">12 Bulan</span>
+                                            </td>
+                                            <td class="text-end align-middle">
+                                                <strong class="text-danger">Rp 22.017.600</strong>
+                                            </td>
+                                            <td class="text-end align-middle">
+                                                <span class="text-success">Rp 1.834.800</span>
+                                            </td>
+                                            <td class="text-end align-middle">
+                                                <strong class="text-danger fs-5">Rp 20.182.800</strong>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr class="table-light">
+                                            <td colspan="6" class="text-center align-middle">
+                                                <strong>Jumlah Total</strong>
+                                            </td>
+                                            <td class="text-end align-middle">
+                                                <strong class="text-danger">Rp 45.610.200</strong>
+                                            </td>
+                                            <td class="text-end align-middle">
+                                                <strong class="text-success">Rp 3.669.600</strong>
+                                            </td>
+                                            <td class="text-end align-middle">
+                                                <strong class="text-danger fs-5">Rp 41.940.600</strong>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="py-6 px-6 text-center mt-4">
+                        <p class="mb-0 fs-4">Sistem Koperasi <strong>Akeno Multimedia Solution</strong> &copy; 2025</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="./assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="./assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/js/sidebarmenu.js"></script>
+    <script src="./assets/js/app.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+
+    <!-- DataTables -->
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        // Load Sidebar
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch("sidebar.html")
+                .then(res => res.text())
+                .then(html => {
+                    document.getElementById("sidebar-container").innerHTML = html;
+                    loadScript("./assets/js/sidebarmenu.js");
+                    loadScript("./assets/js/app.min.js");
+                });
+        });
+
+        function loadScript(src) {
+            const script = document.createElement("script");
+            script.src = src;
+            document.body.appendChild(script);
+        }
+
+        // Update Jam Real-time
+        function updateJam() {
+            const now = new Date();
+            const jam = now.getHours().toString().padStart(2, '0');
+            const menit = now.getMinutes().toString().padStart(2, '0');
+            const detik = now.getSeconds().toString().padStart(2, '0');
+            document.getElementById('jam').textContent = `${jam}:${menit}:${detik}`;
+        }
+        setInterval(updateJam, 1000);
+        updateJam();
+
+        // Update Tanggal
+        const options = { day: 'numeric', month: 'long', year: 'numeric' };
+        const tanggal = new Date().toLocaleDateString('id-ID', options);
+        document.getElementById('tanggal').textContent = tanggal;
+
+        // Initialize DataTable
+        let table;
+        $(document).ready(function () {
+            table = $('#tabelKreditMacet').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/id.json'
+                },
+                pageLength: 10,
+                order: [[4, 'asc']], // Sort by tanggal tempo
+                columnDefs: [
+                    { orderable: false, targets: [0] }
+                ],
+                footerCallback: function (row, data, start, end, display) {
+                    var api = this.api();
+
+                    // Helper function to parse currency
+                    var intVal = function (i) {
+                        return typeof i === 'string' ?
+                            i.replace(/[\Rp\.,]/g, '') * 1 :
+                            typeof i === 'number' ?
+                                i : 0;
+                    };
+
+                    // Total over all pages
+                    var totalTagihan = api.column(6).data().reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                    var totalDibayar = api.column(7).data().reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                    var totalSisa = api.column(8).data().reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                    // Update footer
+                    $(api.column(6).footer()).html(
+                        '<strong class="text-danger">' + formatRupiah(totalTagihan) + '</strong>'
+                    );
+                    $(api.column(7).footer()).html(
+                        '<strong class="text-success">' + formatRupiah(totalDibayar) + '</strong>'
+                    );
+                    $(api.column(8).footer()).html(
+                        '<strong class="text-danger fs-5">' + formatRupiah(totalSisa) + '</strong>'
+                    );
+
+                    // Update summary badges
+                    $('#totalTagihan').text(formatRupiah(totalTagihan));
+                    $('#sisaTagihan').text(formatRupiah(totalSisa));
+                }
+            });
+
+            // Update periode text
+            updatePeriodeText();
+        });
+
+        // Function: Format Rupiah
+        function formatRupiah(angka) {
+            var number_string = angka.toString().replace(/[^,\d]/g, '');
+            var split = number_string.split(',');
+            var sisa = split[0].length % 3;
+            var rupiah = split[0].substr(0, sisa);
+            var ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+            if (ribuan) {
+                var separator = sisa ? '.' : '';
+                rupiah += separator + ribuan.join('.');
+            }
+
+            rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+            return 'Rp ' + rupiah;
+        }
+
+        // Function: Update Periode Text
+        function updatePeriodeText() {
+            const periodeInput = document.getElementById('filterPeriode').value;
+            if (periodeInput) {
+                const [year, month] = periodeInput.split('-');
+                const date = new Date(year, month - 1);
+                const monthName = date.toLocaleDateString('id-ID', { month: 'long', year: 'numeric' });
+                document.getElementById('periodeText').textContent = monthName;
+            }
+        }
+
+        // Function: Filter Data
+        function filterData() {
+            const periode = $('#filterPeriode').val();
+
+            if (!periode) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Peringatan!',
+                    text: 'Silakan pilih periode terlebih dahulu',
+                    confirmButtonColor: '#3085d6'
+                });
+                return;
+            }
+
+            Swal.fire({
+                title: 'Memproses...',
+                text: 'Sedang mengambil data kredit macet',
+                allowOutsideClick: false,
+                showConfirmButton: false,
+                willOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+
+            // Simulate AJAX request
+            setTimeout(() => {
+                updatePeriodeText();
+
+                Swal.close();
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Data Ditampilkan!',
+                    text: 'Data kredit macet berhasil dimuat',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+
+                // In production, reload table with filters
+                /* 
+                $.ajax({
+                    url: 'lap_kredit_macet/get_data',
+                    type: 'POST',
+                    data: { periode: periode },
+                    dataType: 'json',
+                    success: function(response) {
+                        if(response.status === 'success') {
+                            table.clear();
+                            table.rows.add(response.data);
+                            table.draw();
+                            
+                            updatePeriodeText();
+                            
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Berhasil!',
+                                text: 'Data berhasil dimuat',
+                                timer: 1500
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Gagal!',
+                                text: response.message
+                            });
+                        }
+                    },
+                    error: function() {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error!',
+                            text: 'Tidak dapat terhubung ke server'
+                        });
+                    }
+                });
+                */
+            }, 1000);
+        }
+
+        // Function: Reset Filter
+        function resetFilter() {
+            const today = new Date();
+            const currentMonth = today.toISOString().slice(0, 7);
+            $('#filterPeriode').val(currentMonth);
+
+            updatePeriodeText();
+
+            Swal.fire({
+                icon: 'info',
+                title: 'Filter Direset',
+                text: 'Filter dikembalikan ke bulan ini',
+                timer: 1500,
+                showConfirmButton: false
+            });
+        }
+
+        // Function: Cetak Laporan
+        function cetakLaporan() {
+            const periode = $('#filterPeriode').val();
+
+            if (!periode) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Peringatan!',
+                    text: 'Silakan pilih periode terlebih dahulu',
+                    confirmButtonColor: '#3085d6'
+                });
+                return;
+            }
+
+            Swal.fire({
+                icon: 'info',
+                title: 'Membuka Jendela Cetak',
+                text: 'Laporan akan dibuka di tab baru',
+                timer: 1500,
+                showConfirmButton: false
+            });
+
+            // Open print window
+            const url = `cetak_kredit_macet.php?periode=${periode}`;
+            window.open(url, '_blank');
+        }
+
+        // Function: Export Excel
+        function exportExcel() {
+            const periode = $('#filterPeriode').val();
+
+            if (!periode) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Peringatan!',
+                    text: 'Silakan pilih periode terlebih dahulu',
+                    confirmButtonColor: '#3085d6'
+                });
+                return;
+            }
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Export Excel',
+                text: 'File akan segera diunduh...',
+                timer: 1500,
+                showConfirmButton: false
+            });
+
+            // Download file
+            // window.location.href = `export_kredit_macet_excel.php?periode=${periode}`;
+        }
+
+        // Function: Kirim Pemanggilan
+        function kirimPemanggilan() {
+            const periode = $('#filterPeriode').val();
+            const totalData = $('#totalData').text();
+
+            if (!periode) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Peringatan!',
+                    text: 'Silakan pilih periode terlebih dahulu',
+                    confirmButtonColor: '#3085d6'
+                });
+                return;
+            }
+
+            Swal.fire({
+                title: 'Kirim Surat Pemanggilan?',
+                html: `
+            <div class="text-start">
+                <p class="mb-3">Surat pemanggilan akan dikirim kepada <strong>${totalData} anggota</strong> yang memiliki kredit macet pada periode <strong>${document.getElementById('periodeText').textContent}</strong></p>
+                
+                <div class="alert alert-warning" role="alert">
+                    <i class="ti ti-alert-triangle"></i> 
+                    <strong>Perhatian:</strong> Pastikan data sudah benar sebelum mengirim surat pemanggilan
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Metode Pengiriman <span class="text-danger">*</span></label>
+                    <select id="swal-metode" class="form-select">
+                        <option value="email">Email</option>
+                        <option value="sms">SMS</option>
+                        <option value="whatsapp">WhatsApp</option>
+                        <option value="cetak">Cetak Surat</option>
+                    </select>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Catatan Tambahan</label>
+                    <textarea id="swal-catatan" class="form-control" rows="3" placeholder="Opsional - Tambahkan catatan khusus"></textarea>
+                </div>
+            </div>
+        `,
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: '<i class="ti ti-send"></i> Ya, Kirim',
+                cancelButtonText: '<i class="ti ti-x"></i> Batal',
+                confirmButtonColor: '#dc3545',
+                customClass: {
+                    confirmButton: 'btn btn-danger',
+                    cancelButton: 'btn btn-secondary'
+                },
+                preConfirm: () => {
+                    const metode = document.getElementById('swal-metode').value;
+                    const catatan = document.getElementById('swal-catatan').value;
+
+                    if (!metode) {
+                        Swal.showValidationMessage('Metode pengiriman harus dipilih!');
+                        return false;
+                    }
+
+                    return { metode, catatan };
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'Mengirim...',
+                        text: 'Mohon tunggu sebentar',
+                        allowOutsideClick: false,
+                        showConfirmButton: false,
+                        willOpen: () => {
+                            Swal.showLoading();
+                        }
+                    });
+
+                    // Simulate sending
+                    setTimeout(() => {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil Dikirim!',
+                            html: `Surat pemanggilan telah dikirim melalui <strong>${result.value.metode}</strong> kepada ${totalData} anggota`,
+                            timer: 3000,
+                            showConfirmButton: false
+                        });
+
+                        /* Production AJAX:
+                        $.ajax({
+                            url: 'kredit_macet/kirim_pemanggilan',
+                            type: 'POST',
+                            data: {
+                                periode: periode,
+                                metode: result.value.metode,
+                                catatan: result.value.catatan
+                            },
+                            dataType: 'json',
+                            success: function(response) {
+                                if(response.status === 'success') {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Berhasil!',
+                                        text: response.message,
+                                        timer: 3000
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Gagal!',
+                                        text: response.message
+                                    });
+                                }
+                            },
+                            error: function() {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error!',
+                                    text: 'Tidak dapat terhubung ke server'
+                                });
+                            }
+                        });
+                        */
+                    }, 1500);
+                }
+            });
+        }
+
+        // Function: Tindak Lanjut
+        function tindakLanjut() {
+            const periode = $('#filterPeriode').val();
+
+            if (!periode) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Peringatan!',
+                    text: 'Silakan pilih periode terlebih dahulu',
+                    confirmButtonColor: '#3085d6'
+                });
+                return;
+            }
+
+            Swal.fire({
+                title: 'Tindak Lanjut Kredit Macet',
+                html: `
+            <div class="text-start">
+                <p class="mb-3">Pilih tindak lanjut untuk kredit macet periode <strong>${document.getElementById('periodeText').textContent}</strong></p>
+                
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action" onclick="tindakLanjutDetail('penjadwalan')">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1"><i class="ti ti-calendar-event text-info"></i> Penjadwalan Ulang</h6>
+                        </div>
+                        <p class="mb-1 text-muted small">Atur jadwal pembayaran baru dengan anggota</p>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action" onclick="tindakLanjutDetail('restrukturisasi')">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1"><i class="ti ti-refresh text-warning"></i> Restrukturisasi Pinjaman</h6>
+                        </div>
+                        <p class="mb-1 text-muted small">Ubah skema pembayaran pinjaman</p>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action" onclick="tindakLanjutDetail('peringatan')">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1"><i class="ti ti-alert-triangle text-danger"></i> Surat Peringatan</h6>
+                        </div>
+                        <p class="mb-1 text-muted small">Kirim surat peringatan resmi</p>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action" onclick="tindakLanjutDetail('pertemuan')">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1"><i class="ti ti-users text-primary"></i> Jadwalkan Pertemuan</h6>
+                        </div>
+                        <p class="mb-1 text-muted small">Atur pertemuan dengan anggota</p>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action" onclick="tindakLanjutDetail('penghapusan')">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1"><i class="ti ti-trash text-danger"></i> Penghapusan Tagihan</h6>
+                        </div>
+                        <p class="mb-1 text-muted small">Hapus tagihan yang tidak dapat ditagih (write-off)</p>
+                    </a>
+                </div>
+            </div>
+        `,
+                showConfirmButton: false,
+                showCancelButton: true,
+                cancelButtonText: '<i class="ti ti-x"></i> Tutup',
+                width: '600px',
+                customClass: {
+                    cancelButton: 'btn btn-secondary'
+                }
+            });
+        }
+
+        // Function: Tindak Lanjut Detail
+        function tindakLanjutDetail(jenis) {
+            Swal.close();
+
+            let title = '';
+            let icon = '';
+            let color = '';
+
+            switch (jenis) {
+                case 'penjadwalan':
+                    title = 'Penjadwalan Ulang Pembayaran';
+                    icon = 'ti ti-calendar-event';
+                    color = 'info';
+                    break;
+                case 'restrukturisasi':
+                    title = 'Restrukturisasi Pinjaman';
+                    icon = 'ti ti-refresh';
+                    color = 'warning';
+                    break;
+                case 'peringatan':
+                    title = 'Surat Peringatan';
+                    icon = 'ti ti-alert-triangle';
+                    color = 'danger';
+                    break;
+                case 'pertemuan':
+                    title = 'Jadwalkan Pertemuan';
+                    icon = 'ti ti-users';
+                    color = 'primary';
+                    break;
+                case 'penghapusan':
+                    title = 'Penghapusan Tagihan (Write-off)';
+                    icon = 'ti ti-trash';
+                    color = 'danger';
+                    break;
+            }
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Fitur Segera Hadir',
+                html: `<p>Fitur <strong>${title}</strong> sedang dalam pengembangan</p>`,
+                timer: 2000,
+                showConfirmButton: false
+            });
+        }
+
+        // Initialize Bootstrap Tooltips
+        document.addEventListener('DOMContentLoaded', function () {
+            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+
+        // Update periode text on change
+        document.getElementById('filterPeriode').addEventListener('change', function () {
+            updatePeriodeText();
+        });
+    </script>
+
+</body>
+
+</html>

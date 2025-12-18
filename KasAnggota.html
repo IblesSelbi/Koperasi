@@ -1,0 +1,904 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kas Anggota - Sistem Koperasi Bina Tirta Lestari</title>
+    <link rel="shortcut icon" type="image/png" href="./assets/images/logos/favicon.png" />
+    <link rel="stylesheet" href="./assets/css/styles.min.css" />
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.bootstrap5.min.css">
+</head>
+
+<body>
+    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+        data-sidebar-position="fixed" data-header-position="fixed">
+
+        <!-- App Topstrip -->
+        <div class="app-topstrip bg-dark py-6 px-3 w-100 d-lg-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center justify-content-center gap-5 mb-2 mb-lg-0">
+                <a class="d-flex justify-content-center" href="#">
+                    <img src="assets/images/logos/logo-wrappixel.svg" alt="" width="150" height="37">
+                </a>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div id="sidebar-container"></div>
+
+        <!-- Main wrapper -->
+        <div class="body-wrapper">
+            <!-- Header Start -->
+            <header class="app-header shadow-sm">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <ul class="navbar-nav">
+                        <li class="nav-item d-block d-xl-none">
+                            <a class="nav-link sidebartoggler" id="headerCollapse" href="javascript:void(0)">
+                                <i class="ti ti-menu-2"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link position-relative" href="javascript:void(0)" id="drop1"
+                                data-bs-toggle="dropdown">
+                                <i class="ti ti-bell fs-7"></i>
+                                <span class="position-absolute top-0 end-0 badge rounded-pill bg-danger"
+                                    style="font-size:11px">3</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-animate-up" style="min-width: 320px;">
+                                <div class="px-3 py-2 bg-light border-bottom">
+                                    <h6 class="mb-0">Notifikasi Jatuh Tempo</h6>
+                                </div>
+                                <a href="javascript:void(0)" class="dropdown-item border-bottom py-3">
+                                    <div class="d-flex align-items-start">
+                                        <i class="ti ti-alert-circle fs-5 text-warning"></i>
+                                        <div class="ms-2">
+                                            <h6 class="mb-1 fw-semibold">Hartati</h6>
+                                            <p class="mb-1 fs-2 text-muted">Jatuh tempo: 16 Jun 2025</p>
+                                            <span class="badge bg-danger-subtle text-danger">Sisa: Rp 1.575.000</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="navbar-collapse justify-content-end px-0">
+                        <ul class="navbar-nav flex-row ms-auto align-items-center">
+                            <li class="nav-item me-3">
+                                <span class="text-dark">
+                                    <i class="ti ti-calendar"></i> <span id="tanggal">18 December 2025</span>
+                                    <i class="ti ti-clock ms-2"></i> <span id="jam">00:00:00</span>
+                                </span>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" href="javascript:void(0)" data-bs-toggle="dropdown">
+                                    <img src="./assets/images/profile/user-1.jpg" width="35" height="35"
+                                        class="rounded-circle">
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up">
+                                    <a href="#" class="dropdown-item"><i class="ti ti-user"></i> Profil Saya</a>
+                                    <a href="#" class="dropdown-item"><i class="ti ti-key"></i> Ubah Password</a>
+                                    <a href="#" class="btn btn-outline-primary mx-2 mt-2 d-block">Logout</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+
+            <div class="body-wrapper-inner">
+                <div class="container-fluid">
+                    <!-- Page Header -->
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h4 class="fw-semibold mb-1">Laporan Kas Per Anggota</h4>
+                                    <p class="text-muted fs-3 mb-0">Data kas simpanan dan tagihan kredit anggota
+                                        koperasi</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Toolbar Card -->
+                    <div class="card mb-3 shadow-sm">
+                        <div class="card-header bg-light border-bottom">
+                            <h6 class="mb-0 fw-semibold"><i class="ti ti-filter me-2"></i>Filter & Pencarian Data</h6>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="row g-3">
+                                <!-- Pilih Anggota -->
+                                <div class="col-md-6 col-lg-4">
+                                    <label class="form-label fw-semibold mb-2">
+                                        <i class="ti ti-user text-primary"></i> Pilih ID Anggota
+                                    </label>
+                                    <select class="form-select" id="filterAnggota">
+                                        <option value="">Semua Anggota</option>
+                                        <option value="member1">member1 - FAISAL</option>
+                                        <option value="member2">member2 - GEO HALOMOAN SIMANJUNTAK</option>
+                                        <option value="anggota">anggota - WIDI ALJATSIYAH</option>
+                                        <option value="fulan">fulan - FULAN</option>
+                                        <option value="pengguna">pengguna - PENGGUNA</option>
+                                        <option value="cahyadi001">cahyadi001 - CAHYADI</option>
+                                        <option value="Renaldi Ambon">Renaldi Ambon - RENALDI</option>
+                                        <option value="yogi">yogi - YOGI HERMAWAN</option>
+                                        <option value="mar">mar - MARTONO</option>
+                                        <option value="masud">masud - MASUD</option>
+                                    </select>
+                                </div>
+
+                                <!-- Filter Status Pembayaran -->
+                                <div class="col-md-6 col-lg-3">
+                                    <label class="form-label fw-semibold mb-2">
+                                        <i class="ti ti-list-check text-success"></i> Status Pembayaran
+                                    </label>
+                                    <select class="form-select" id="filterStatus">
+                                        <option value="">Semua Status</option>
+                                        <option value="Lancar">Lancar</option>
+                                        <option value="Macet">Macet</option>
+                                    </select>
+                                </div>
+
+                                <!-- Filter Jabatan -->
+                                <div class="col-md-6 col-lg-3">
+                                    <label class="form-label fw-semibold mb-2">
+                                        <i class="ti ti-briefcase text-info"></i> Jabatan
+                                    </label>
+                                    <select class="form-select" id="filterJabatan">
+                                        <option value="">Semua Jabatan</option>
+                                        <option value="Produksi BOPP">Anggota - Produksi BOPP</option>
+                                        <option value="Engineering">Anggota - Engineering</option>
+                                        <option value="Accounting">Anggota - Accounting</option>
+                                    </select>
+                                </div>
+
+                                <!-- Action Buttons -->
+                                <div class="col-md-6 col-lg-2">
+                                    <label class="form-label fw-semibold mb-2 d-none d-lg-block">&nbsp;</label>
+                                    <div class="d-flex gap-2">
+                                        <button class="btn btn-primary w-100" onclick="filterData()">
+                                            <i class="ti ti-search"></i> Cari
+                                        </button>
+                                        <button class="btn btn-outline-secondary" onclick="resetFilter()"
+                                            data-bs-toggle="tooltip" title="Reset Filter">
+                                            <i class="ti ti-refresh"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Secondary Actions -->
+                            <div class="row mt-3 pt-3 border-top">
+                                <div class="col-12">
+                                    <div class="d-flex gap-2 flex-wrap">
+                                        <button class="btn btn-info btn-sm" onclick="cetakLaporan()">
+                                            <i class="ti ti-printer"></i> Cetak Laporan
+                                        </button>
+                                        <button class="btn btn-success btn-sm" onclick="exportExcel()">
+                                            <i class="ti ti-file-spreadsheet"></i> Export Excel
+                                        </button>
+                                        <div class="ms-auto">
+                                            <span class="badge bg-primary-subtle text-primary px-3 py-2">
+                                                <i class="ti ti-users"></i> Total Anggota: <strong
+                                                    id="totalData">10</strong>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Data Table Card -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="tabelKasAnggota"
+                                    class="table table-hover align-middle rounded-2 border overflow-hidden"
+                                    style="width:100%">
+                                    <thead class="table-primary">
+                                        <tr>
+                                            <th class="text-center align-middle" style="width: 5%;">No.</th>
+                                            <th class="text-center align-middle" style="width: 5%;">Photo</th>
+                                            <th class="align-middle" style="width: 23%;">Identitas</th>
+                                            <th class="align-middle" style="width: 20%;">Saldo Simpanan</th>
+                                            <th class="align-middle" style="width: 20%;">Tagihan Kredit</th>
+                                            <th class="align-middle" style="width: 23%;">Keterangan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Sample Data Row 1 -->
+                                        <tr>
+                                            <td class="text-center align-middle">
+                                                <span class="fw-semibold">1</span>
+                                            </td>
+                                            <td class="text-center align-middle">
+                                                <img src="https://ksp.walproject.net/assets/theme_admin/img/photo.jpg"
+                                                    alt="default" width="60" height="80" class="rounded border" />
+                                            </td>
+                                            <td class="align-middle">
+                                                <div class="mb-1">
+                                                    <small class="text-muted">ID Anggota:</small>
+                                                    <span class="badge bg-info-subtle text-info">member1</span>
+                                                </div>
+                                                <div class="mb-1">
+                                                    <small class="text-muted">Nama:</small>
+                                                    <strong class="text-dark">FAISAL</strong>
+                                                </div>
+                                                <div class="mb-1">
+                                                    <small class="text-muted">Jenis Kelamin:</small>
+                                                    <span>Laki-Laki</span>
+                                                </div>
+                                                <div class="mb-1">
+                                                    <small class="text-muted">Jabatan:</small>
+                                                    <span>Anggota - Produksi BOPP</span>
+                                                </div>
+                                                <div>
+                                                    <small class="text-muted">Alamat:</small>
+                                                    <span>duren sawit, jakarta timur</span><br>
+                                                    <small class="text-muted">Telp:</small>
+                                                    <span>089533222331</span>
+                                                </div>
+                                            </td>
+                                            <td class="align-middle">
+                                                <div>
+                                                    <div class="d-flex justify-content-between border-bottom pb-1 mb-1">
+                                                        <small class="text-muted">Simpanan Sukarela</small>
+                                                        <span class="text-end">Rp 0</span>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between border-bottom pb-1 mb-1">
+                                                        <small class="text-muted">Simpanan Pokok</small>
+                                                        <span class="text-end">Rp 100.000</span>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between border-bottom pb-1 mb-1">
+                                                        <small class="text-muted">Simpanan Wajib</small>
+                                                        <span class="text-end">Rp 0</span>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between border-bottom pb-1 mb-1">
+                                                        <small class="text-muted">Asdf</small>
+                                                        <span class="text-end">Rp 0</span>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between pt-1">
+                                                        <strong class="text-primary">Jumlah Simpanan</strong>
+                                                        <strong class="text-success">Rp 100.000</strong>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="align-middle">
+                                                <div>
+                                                    <div class="d-flex justify-content-between border-bottom pb-1 mb-1">
+                                                        <small class="text-muted">Pokok Pinjaman</small>
+                                                        <span class="text-end">Rp 10.000.000</span>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between border-bottom pb-1 mb-1">
+                                                        <small class="text-muted">Tagihan + Denda</small>
+                                                        <span class="text-end text-warning">Rp 22.017.600</span>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between border-bottom pb-1 mb-1">
+                                                        <small class="text-muted">Dibayar</small>
+                                                        <span class="text-end">Rp 1.834.800</span>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between pt-1">
+                                                        <strong class="text-primary">Sisa Tagihan</strong>
+                                                        <strong class="text-danger">Rp 20.182.800</strong>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="align-middle">
+                                                <div>
+                                                    <div class="d-flex justify-content-between border-bottom pb-1 mb-1">
+                                                        <small class="text-muted">Jumlah Pinjaman</small>
+                                                        <span class="text-end">2</span>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between border-bottom pb-1 mb-1">
+                                                        <small class="text-muted">Pinjaman Lunas</small>
+                                                        <span class="text-end">1</span>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between border-bottom pb-1 mb-1">
+                                                        <small class="text-muted">Pembayaran</small>
+                                                        <span class="badge bg-danger-subtle text-danger">Macet</span>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between pt-1">
+                                                        <small class="text-muted">Tanggal Tempo</small>
+                                                        <span class="badge bg-warning-subtle text-warning">20 Ags
+                                                            2025</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+
+                                        </tr>
+
+                                        <!-- Sample Data Row 2 -->
+                                        <tr>
+                                            <td class="text-center align-middle">
+                                                <span class="fw-semibold">2</span>
+                                            </td>
+                                            <td class="text-center align-middle">
+                                                <img src="https://ksp.walproject.net/uploads/anggota/6982b-foto-geoooo.jpg"
+                                                    alt="Foto" width="60" height="80" class="rounded border" />
+                                            </td>
+                                            <td class="align-middle">
+                                                <div class="mb-1">
+                                                    <small class="text-muted">ID Anggota:</small>
+                                                    <span class="badge bg-info-subtle text-info">member2</span>
+                                                </div>
+                                                <div class="mb-1">
+                                                    <small class="text-muted">Nama:</small>
+                                                    <strong class="text-dark">GEO HALOMOAN SIMANJUNTAK</strong>
+                                                </div>
+                                                <div class="mb-1">
+                                                    <small class="text-muted">Jenis Kelamin:</small>
+                                                    <span>Laki-Laki</span>
+                                                </div>
+                                                <div class="mb-1">
+                                                    <small class="text-muted">Jabatan:</small>
+                                                    <span>Anggota - Produksi BOPP</span>
+                                                </div>
+                                                <div>
+                                                    <small class="text-muted">Alamat:</small>
+                                                    <span>villa mutiara jaya 2 cibititung</span><br>
+                                                    <small class="text-muted">Telp:</small>
+                                                    <span>081362787674</span>
+                                                </div>
+                                            </td>
+                                            <td class="align-middle">
+                                                <div>
+                                                    <div class="d-flex justify-content-between border-bottom pb-1 mb-1">
+                                                        <small class="text-muted">Simpanan Sukarela</small>
+                                                        <span class="text-end">Rp 0</span>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between border-bottom pb-1 mb-1">
+                                                        <small class="text-muted">Simpanan Pokok</small>
+                                                        <span class="text-end text-danger">Rp -100.000</span>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between border-bottom pb-1 mb-1">
+                                                        <small class="text-muted">Simpanan Wajib</small>
+                                                        <span class="text-end">Rp 0</span>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between border-bottom pb-1 mb-1">
+                                                        <small class="text-muted">Asdf</small>
+                                                        <span class="text-end">Rp 0</span>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between pt-1">
+                                                        <strong class="text-primary">Jumlah Simpanan</strong>
+                                                        <strong class="text-danger">Rp -100.000</strong>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="align-middle">
+                                                <div>
+                                                    <div class="d-flex justify-content-between border-bottom pb-1 mb-1">
+                                                        <small class="text-muted">Pokok Pinjaman</small>
+                                                        <span class="text-end">Rp 0</span>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between border-bottom pb-1 mb-1">
+                                                        <small class="text-muted">Tagihan + Denda</small>
+                                                        <span class="text-end text-warning">Rp 0</span>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between border-bottom pb-1 mb-1">
+                                                        <small class="text-muted">Dibayar</small>
+                                                        <span class="text-end">Rp 0</span>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between pt-1">
+                                                        <strong class="text-primary">Sisa Tagihan</strong>
+                                                        <strong class="text-success">Rp 0</strong>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="align-middle">
+                                                <div>
+                                                    <div class="d-flex justify-content-between border-bottom pb-1 mb-1">
+                                                        <small class="text-muted">Jumlah Pinjaman</small>
+                                                        <span class="text-end">0</span>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between border-bottom pb-1 mb-1">
+                                                        <small class="text-muted">Pinjaman Lunas</small>
+                                                        <span class="text-end">0</span>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between border-bottom pb-1 mb-1">
+                                                        <small class="text-muted">Pembayaran</small>
+                                                        <span class="badge bg-success-subtle text-success">Lancar</span>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between pt-1">
+                                                        <small class="text-muted">Tanggal Tempo</small>
+                                                        <span class="badge bg-secondary-subtle text-secondary">-</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="py-6 px-6 text-center mt-4">
+                        <p class="mb-0 fs-4">Sistem Koperasi <strong>Akeno Multimedia Solution</strong> &copy; 2025</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="./assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="./assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/js/sidebarmenu.js"></script>
+    <script src="./assets/js/app.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+
+    <!-- DataTables -->
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        // Load Sidebar
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch("sidebar.html")
+                .then(res => res.text())
+                .then(html => {
+                    document.getElementById("sidebar-container").innerHTML = html;
+                    loadScript("./assets/js/sidebarmenu.js");
+                    loadScript("./assets/js/app.min.js");
+                });
+        });
+
+        function loadScript(src) {
+            const script = document.createElement("script");
+            script.src = src;
+            document.body.appendChild(script);
+        }
+
+        // Update Jam Real-time
+        function updateJam() {
+            const now = new Date();
+            const jam = now.getHours().toString().padStart(2, '0');
+            const menit = now.getMinutes().toString().padStart(2, '0');
+            const detik = now.getSeconds().toString().padStart(2, '0');
+            document.getElementById('jam').textContent = `${jam}:${menit}:${detik}`;
+        }
+        setInterval(updateJam, 1000);
+        updateJam();
+
+        // Update Tanggal
+        const options = { day: 'numeric', month: 'long', year: 'numeric' };
+        const tanggal = new Date().toLocaleDateString('id-ID', options);
+        document.getElementById('tanggal').textContent = tanggal;
+
+        // Initialize DataTable
+        let table;
+        $(document).ready(function () {
+            table = $('#tabelKasAnggota').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/id.json',
+                    search: "Cari:",
+                    lengthMenu: "Tampilkan _MENU_ data per halaman",
+                    info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+                    infoEmpty: "Menampilkan 0 sampai 0 dari 0 data",
+                    infoFiltered: "(difilter dari _MAX_ total data)",
+                    paginate: {
+                        first: "Pertama",
+                        last: "Terakhir",
+                        next: "Selanjutnya",
+                        previous: "Sebelumnya"
+                    },
+                    zeroRecords: "Tidak ada data yang ditemukan",
+                    emptyTable: "Tidak ada data yang tersedia"
+                },
+                pageLength: 10,
+                lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "Semua"]],
+                order: [[0, 'asc']],
+                columnDefs: [
+                    { orderable: false, targets: [1] }, // Photo tidak bisa diurutkan
+                    { className: "text-center", targets: [0, 1] }
+                ],
+                responsive: true,
+                autoWidth: false
+            });
+
+            // Update total data count
+            updateTotalData();
+
+            // Event listener untuk filter
+            $('#filterAnggota, #filterStatus, #filterJabatan').on('change', function () {
+                filterData();
+            });
+        });
+
+        // Function: Update Total Data
+        function updateTotalData() {
+            const info = table.page.info();
+            $('#totalData').text(info.recordsDisplay);
+        }
+
+        // Function: Filter Data
+        function filterData() {
+            const anggota = $('#filterAnggota').val();
+            const status = $('#filterStatus').val();
+            const jabatan = $('#filterJabatan').val();
+
+            Swal.fire({
+                title: 'Memproses...',
+                text: 'Sedang menerapkan filter',
+                allowOutsideClick: false,
+                showConfirmButton: false,
+                willOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+
+            // Simulasi proses filter
+            setTimeout(() => {
+                // Apply filters to DataTable
+                table.draw();
+                updateTotalData();
+
+                Swal.close();
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Filter Diterapkan!',
+                    text: `Data berhasil difilter`,
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+            }, 800);
+        }
+
+        // Function: Reset Filter
+        function resetFilter() {
+            $('#filterAnggota').val('');
+            $('#filterStatus').val('');
+            $('#filterJabatan').val('');
+
+            if (table) {
+                table.search('').columns().search('').draw();
+                updateTotalData();
+            }
+
+            Swal.fire({
+                icon: 'info',
+                title: 'Filter Direset',
+                text: 'Semua filter telah dikembalikan',
+                timer: 1500,
+                showConfirmButton: false
+            });
+        }
+
+        // Function: Cetak Laporan
+        function cetakLaporan() {
+            const anggota = $('#filterAnggota').val();
+            const status = $('#filterStatus').val();
+            const jabatan = $('#filterJabatan').val();
+
+            let filterInfo = 'Semua Data';
+            if (anggota) filterInfo = `Anggota: ${anggota}`;
+            if (status) filterInfo += ` | Status: ${status}`;
+            if (jabatan) filterInfo += ` | Jabatan: ${jabatan}`;
+
+            Swal.fire({
+                title: 'Cetak Laporan',
+                html: `
+                    <div class="text-start">
+                        <p><strong>Filter yang diterapkan:</strong></p>
+                        <p class="text-muted">${filterInfo}</p>
+                        <hr>
+                        <p>Laporan akan dibuka di tab baru</p>
+                    </div>
+                `,
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonText: '<i class="ti ti-printer"></i> Cetak',
+                cancelButtonText: '<i class="ti ti-x"></i> Batal',
+                confirmButtonColor: '#0d6efd',
+                customClass: {
+                    confirmButton: 'btn btn-primary',
+                    cancelButton: 'btn btn-secondary'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const url = `cetak_kas_anggota.php?anggota=${anggota}&status=${status}&jabatan=${jabatan}`;
+                    window.open(url, '_blank');
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil!',
+                        text: 'Laporan dibuka di tab baru',
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
+                }
+            });
+        }
+
+        // Function: Export Excel
+        function exportExcel() {
+            const anggota = $('#filterAnggota').val();
+            const status = $('#filterStatus').val();
+            const jabatan = $('#filterJabatan').val();
+
+            Swal.fire({
+                title: 'Export ke Excel',
+                html: `
+                    <div class="text-start">
+                        <p>Data kas anggota akan diekspor ke format Excel (.xlsx)</p>
+                        <hr>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="includePhoto" checked>
+                            <label class="form-check-label" for="includePhoto">
+                                Sertakan foto anggota
+                            </label>
+                        </div>
+                    </div>
+                `,
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: '<i class="ti ti-file-spreadsheet"></i> Export',
+                cancelButtonText: '<i class="ti ti-x"></i> Batal',
+                confirmButtonColor: '#198754',
+                customClass: {
+                    confirmButton: 'btn btn-success',
+                    cancelButton: 'btn btn-secondary'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'Mengekspor Data...',
+                        text: 'Mohon tunggu sebentar',
+                        allowOutsideClick: false,
+                        showConfirmButton: false,
+                        willOpen: () => {
+                            Swal.showLoading();
+                        }
+                    });
+
+                    // Simulasi export
+                    setTimeout(() => {
+                        const includePhoto = document.getElementById('includePhoto').checked;
+                        const url = `export_kas_anggota.php?anggota=${anggota}&status=${status}&jabatan=${jabatan}&photo=${includePhoto}`;
+
+                        // Simulasi download
+                        // window.location.href = url;
+
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil!',
+                            text: 'File Excel berhasil diunduh',
+                            timer: 2000,
+                            showConfirmButton: false
+                        });
+                    }, 1500);
+                }
+            });
+        }
+
+        // Function: Detail Anggota
+        function detailAnggota(idAnggota) {
+            Swal.fire({
+                title: 'Memuat Data...',
+                text: 'Mohon tunggu sebentar',
+                allowOutsideClick: false,
+                showConfirmButton: false,
+                willOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+
+            // Simulasi load data
+            setTimeout(() => {
+                Swal.fire({
+                    title: `<strong>Detail Kas Anggota</strong>`,
+                    html: `
+                        <div class="text-start">
+                            <div class="row mb-3">
+                                <div class="col-4 text-center">
+                                    <img src="https://ksp.walproject.net/assets/theme_admin/img/photo.jpg" 
+                                         class="img-fluid rounded border" 
+                                         style="max-height: 150px;">
+                                </div>
+                                <div class="col-8">
+                                    <table class="table table-sm">
+                                        <tr>
+                                            <td width="40%">ID Anggota</td>
+                                            <td><strong>${idAnggota}</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Nama</td>
+                                            <td><strong>FAISAL</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jabatan</td>
+                                            <td>Anggota - Produksi BOPP</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Telepon</td>
+                                            <td>089533222331</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                            <hr>
+                            
+                            <h6 class="text-primary"><i class="ti ti-wallet"></i> Saldo Simpanan</h6>
+                            <table class="table table-sm table-bordered">
+                                <tr>
+                                    <td>Simpanan Sukarela</td>
+                                    <td class="text-end">Rp 0</td>
+                                </tr>
+                                <tr>
+                                    <td>Simpanan Pokok</td>
+                                    <td class="text-end">Rp 100.000</td>
+                                </tr>
+                                <tr>
+                                    <td>Simpanan Wajib</td>
+                                    <td class="text-end">Rp 0</td>
+                                </tr>
+                                <tr class="table-primary">
+                                    <td><strong>Total Simpanan</strong></td>
+                                    <td class="text-end"><strong>Rp 100.000</strong></td>
+                                </tr>
+                            </table>
+                            
+                            <h6 class="text-danger mt-3"><i class="ti ti-credit-card"></i> Tagihan Kredit</h6>
+                            <table class="table table-sm table-bordered">
+                                <tr>
+                                    <td>Pokok Pinjaman</td>
+                                    <td class="text-end">Rp 10.000.000</td>
+                                </tr>
+                                <tr>
+                                    <td>Tagihan + Denda</td>
+                                    <td class="text-end">Rp 22.017.600</td>
+                                </tr>
+                                <tr>
+                                    <td>Sudah Dibayar</td>
+                                    <td class="text-end">Rp 1.834.800</td>
+                                </tr>
+                                <tr class="table-danger">
+                                    <td><strong>Sisa Tagihan</strong></td>
+                                    <td class="text-end"><strong>Rp 20.182.800</strong></td>
+                                </tr>
+                            </table>
+                            
+                            <div class="alert alert-warning mt-3">
+                                <strong><i class="ti ti-alert-circle"></i> Status:</strong> Macet<br>
+                                <strong>Tanggal Tempo:</strong> 20 Ags 2025
+                            </div>
+                        </div>
+                    `,
+                    width: '700px',
+                    showCancelButton: true,
+                    confirmButtonText: '<i class="ti ti-printer"></i> Cetak Kartu',
+                    cancelButtonText: '<i class="ti ti-x"></i> Tutup',
+                    confirmButtonColor: '#0d6efd',
+                    customClass: {
+                        confirmButton: 'btn btn-primary',
+                        cancelButton: 'btn btn-secondary'
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        cetakKartu(idAnggota);
+                    }
+                });
+            }, 1000);
+        }
+
+        // Function: Cetak Kartu Anggota
+        function cetakKartu(idAnggota) {
+            Swal.fire({
+                title: 'Mencetak Kartu...',
+                text: 'Mohon tunggu sebentar',
+                allowOutsideClick: false,
+                showConfirmButton: false,
+                willOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+
+            setTimeout(() => {
+                const url = `cetak_kartu_anggota.php?id=${idAnggota}`;
+                window.open(url, '_blank');
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil!',
+                    text: 'Kartu anggota dibuka di tab baru',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+            }, 1000);
+        }
+
+        // Initialize Bootstrap Tooltips
+        document.addEventListener('DOMContentLoaded', function () {
+            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+
+        // Table row selection
+        $('#tabelKasAnggota tbody').on('click', 'tr', function () {
+            if ($(this).hasClass('selected')) {
+                $(this).removeClass('selected');
+            } else {
+                table.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+            }
+        });
+
+        // Search functionality
+        $('#tabelKasAnggota_filter input').on('keyup', function () {
+            updateTotalData();
+        });
+    </script>
+
+    <style>
+        #tabelKasAnggota tbody tr.selected>* {
+            box-shadow: inset 0 0 0 9999px #e7f1ff !important;
+            color: #004085 !important;
+        }
+
+        #tabelKasAnggota tbody tr.selected>* strong,
+        #tabelKasAnggota tbody tr.selected>* .text-muted,
+        #tabelKasAnggota tbody tr.selected>* .text-info,
+        #tabelKasAnggota tbody tr.selected>* .text-warning,
+        #tabelKasAnggota tbody tr.selected>* .text-success,
+        #tabelKasAnggota tbody tr.selected>* .text-danger {
+            color: inherit !important;
+        }
+
+        #tabelKasAnggota tbody tr:hover {
+            cursor: pointer;
+            background-color: #f8f9fa;
+        }
+
+        /* Custom badge styling */
+        .badge {
+            font-weight: 500;
+            padding: 0.35em 0.65em;
+        }
+
+        /* Responsive table adjustments */
+        @media (max-width: 768px) {
+            .table-responsive {
+                font-size: 0.875rem;
+            }
+
+            .btn-group-vertical .btn {
+                font-size: 0.75rem;
+                padding: 0.25rem 0.5rem;
+            }
+        }
+
+        /* Print styling */
+        @media print {
+
+            .app-header,
+            .app-topstrip,
+            #sidebar-container,
+            .card-header,
+            .btn,
+            .dataTables_filter,
+            .dataTables_length,
+            .dataTables_info,
+            .dataTables_paginate {
+                display: none !important;
+            }
+
+            .card {
+                border: none !important;
+                box-shadow: none !important;
+            }
+        }
+    </style>
+
+</body>
+
+</html>
