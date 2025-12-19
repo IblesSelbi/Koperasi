@@ -10157,6 +10157,16 @@ textarea.form-control-lg {
   border-top-right-radius: 50% !important;
 }
 
+.icon-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
 .rounded-top-pill {
   border-top-left-radius: var(--bs-border-radius-pill) !important;
   border-top-right-radius: var(--bs-border-radius-pill) !important;
