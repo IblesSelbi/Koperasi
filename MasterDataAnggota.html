@@ -1,0 +1,888 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Data Anggota - Sistem Koperasi Bina Tirta Lestari</title>
+    <link rel="shortcut icon" type="image/png" href="./assets/images/logos/favicon.png" />
+    <link rel="stylesheet" href="./assets/css/styles.min.css" />
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.bootstrap5.min.css">
+</head>
+
+<style>
+    #tabelDataAnggota thead th {
+        white-space: nowrap;
+        vertical-align: middle;
+    }
+</style>
+
+<body>
+    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+        data-sidebar-position="fixed" data-header-position="fixed">
+
+        <!-- App Topstrip -->
+        <div class="app-topstrip bg-dark py-6 px-3 w-100 d-lg-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center justify-content-center gap-5 mb-2 mb-lg-0">
+                <a class="d-flex justify-content-center" href="#">
+                    <img src="assets/images/logos/logo-wrappixel.svg" alt="" width="150" height="37">
+                </a>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div id="sidebar-container"></div>
+
+        <!-- Main wrapper -->
+        <div class="body-wrapper">
+            <!-- Header Start -->
+            <header class="app-header shadow-sm">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <ul class="navbar-nav">
+                        <li class="nav-item d-block d-xl-none">
+                            <a class="nav-link sidebartoggler" id="headerCollapse" href="javascript:void(0)">
+                                <i class="ti ti-menu-2"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link position-relative" href="javascript:void(0)" id="drop1"
+                                data-bs-toggle="dropdown">
+                                <i class="ti ti-bell fs-7"></i>
+                                <span class="position-absolute top-0 end-0 badge rounded-pill bg-danger"
+                                    style="font-size:11px">3</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-animate-up" style="min-width: 320px;">
+                                <div class="px-3 py-2 bg-light border-bottom">
+                                    <h6 class="mb-0">Notifikasi Jatuh Tempo</h6>
+                                </div>
+                                <a href="javascript:void(0)" class="dropdown-item border-bottom py-3">
+                                    <div class="d-flex align-items-start">
+                                        <i class="ti ti-alert-circle fs-5 text-warning"></i>
+                                        <div class="ms-2">
+                                            <h6 class="mb-1 fw-semibold">Hartati</h6>
+                                            <p class="mb-1 fs-2 text-muted">Jatuh tempo: 16 Jun 2025</p>
+                                            <span class="badge bg-danger-subtle text-danger">Sisa: Rp 1.575.000</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="navbar-collapse justify-content-end px-0">
+                        <ul class="navbar-nav flex-row ms-auto align-items-center">
+                            <li class="nav-item me-3">
+                                <span class="text-dark">
+                                    <i class="ti ti-calendar"></i> <span id="tanggal">22 December 2025</span>
+                                    <i class="ti ti-clock ms-2"></i> <span id="jam">00:00:00</span>
+                                </span>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" href="javascript:void(0)" data-bs-toggle="dropdown">
+                                    <img src="./assets/images/profile/user-1.jpg" width="35" height="35"
+                                        class="rounded-circle">
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up">
+                                    <a href="#" class="dropdown-item"><i class="ti ti-user"></i> Profil Saya</a>
+                                    <a href="#" class="dropdown-item"><i class="ti ti-key"></i> Ubah Password</a>
+                                    <a href="#" class="btn btn-outline-primary mx-2 mt-2 d-block">Logout</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+
+            <div class="body-wrapper-inner">
+                <div class="container-fluid">
+                    <!-- Page Header -->
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h4 class="fw-semibold mb-1">Master Data - Data Anggota</h4>
+                                    <p class="text-muted fs-3 mb-0">Kelola data anggota koperasi</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Toolbar Card -->
+                    <div class="card mb-3">
+                        <div class="card-body p-3">
+                            <div class="row g-2 align-items-center">
+                                <div class="col-lg-auto">
+                                    <button class="btn btn-primary btn-sm" onclick="tambahData()">
+                                        <i class="ti ti-plus"></i> Tambah
+                                    </button>
+                                    <button class="btn btn-success btn-sm" onclick="eksporData()">
+                                        <i class="ti ti-download"></i> Ekspor
+                                    </button>
+                                    <a href="Impor.html" class="btn btn-success btn-sm">
+                                        <i class="ti ti-upload"></i> Impor
+                                    </a>
+                                    <button class="btn btn-info btn-sm" onclick="cetakLaporan()">
+                                        <i class="ti ti-printer"></i> Cetak
+                                    </button>
+                                </div>
+                                <div class="col-lg-auto ms-auto">
+                                    <div class="input-group input-group-sm" style="width: 250px;">
+                                        <input type="text" class="form-control" id="searchInput"
+                                            placeholder="Cari Anggota">
+                                        <button class="btn btn-primary" onclick="cariData()">
+                                            <i class="ti ti-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-lg-auto">
+                                    <button class="btn btn-secondary btn-sm" onclick="resetFilter()">
+                                        <i class="ti ti-refresh"></i> Reset
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Data Table Card -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="tabelDataAnggota"
+                                    class="table table-hover align-middle rounded-2 border overflow-hidden"
+                                    style="width:100%">
+                                    <thead class="table-primary">
+                                        <tr>
+                                            <th class="text-center align-middle" width="60px">Photo</th>
+                                            <th class="text-center" width="100px">ID Anggota</th>
+                                            <th>Username</th>
+                                            <th>Nama Lengkap</th>
+                                            <th class="text-center" width="100px">Jenis Kelamin</th>
+                                            <th>Alamat</th>
+                                            <th>Kota</th>
+                                            <th>Jabatan</th>
+                                            <th>Departement</th>
+                                            <th class="text-center" width="120px">Tanggal Registrasi</th>
+                                            <th class="text-center" width="100px">Status</th>
+                                            <th class="text-center" width="150px">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Sample Data 1 -->
+                                        <tr data-id="1">
+                                            <td class="text-center">
+                                                <img src="./assets/images/profile/user-1.jpg" class="rounded-circle"
+                                                    width="40" height="40">
+                                            </td>
+                                            <td class="text-center">
+                                                <span
+                                                    class="badge bg-primary-subtle text-primary fw-semibold">AG0001</span>
+                                            </td>
+                                            <td>
+                                                <div class="fw-semibold text-dark">member1</div>
+                                            </td>
+                                            <td>
+                                                <div class="fw-semibold text-dark">Faisal</div>
+                                            </td>
+                                            <td class="text-center">
+                                                <span
+                                                    class="badge bg-info-subtle text-info fw-semibold">Laki-laki</span>
+                                            </td>
+                                            <td>Duren Sawit, Jakarta Timur</td>
+                                            <td>Jakarta</td>
+                                            <td>Anggota</td>
+                                            <td>Produksi BOPP</td>
+                                            <td class="text-center">11/05/2023</td>
+                                            <td class="text-center">
+                                                <span
+                                                    class="badge bg-success-subtle text-success fw-semibold">Aktif</span>
+                                            </td>
+                                            <td class="text-center">
+                                                <button class="btn btn-sm btn-warning me-1" onclick="editData(this)"
+                                                    title="Edit">
+                                                    <i class="ti ti-edit"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-danger" onclick="hapusData(this)"
+                                                    title="Hapus">
+                                                    <i class="ti ti-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <!-- Sample Data 2 -->
+                                        <tr data-id="2">
+                                            <td class="text-center">
+                                                <img src="./assets/images/profile/user-2.jpg" class="rounded-circle"
+                                                    width="40" height="40">
+                                            </td>
+                                            <td class="text-center">
+                                                <span
+                                                    class="badge bg-primary-subtle text-primary fw-semibold">AG0011</span>
+                                            </td>
+                                            <td>
+                                                <div class="fw-semibold text-dark">cahyadi001</div>
+                                            </td>
+                                            <td>
+                                                <div class="fw-semibold text-dark">Cahyadi</div>
+                                            </td>
+                                            <td class="text-center">
+                                                <span
+                                                    class="badge bg-info-subtle text-info fw-semibold">Laki-laki</span>
+                                            </td>
+                                            <td>Jl Swasembada No 69 Kota Cirebon</td>
+                                            <td>Cirebon</td>
+                                            <td>Anggota</td>
+                                            <td>-</td>
+                                            <td class="text-center">24/06/2024</td>
+                                            <td class="text-center">
+                                                <span
+                                                    class="badge bg-success-subtle text-success fw-semibold">Aktif</span>
+                                            </td>
+                                            <td class="text-center">
+                                                <button class="btn btn-sm btn-warning me-1" onclick="editData(this)"
+                                                    title="Edit">
+                                                    <i class="ti ti-edit"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-danger" onclick="hapusData(this)"
+                                                    title="Hapus">
+                                                    <i class="ti ti-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="py-6 px-6 text-center mt-4">
+                        <p class="mb-0 fs-4">Sistem Koperasi <strong>Bina Tirta Lestari</strong> &copy; 2025</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Form Tambah/Edit -->
+    <div class="modal fade" id="modalForm" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Tambah Data Anggota</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formDataAnggota">
+                        <input type="hidden" id="editId" value="">
+
+                        <!-- Nama Lengkap -->
+                        <div class="mb-3">
+                            <label class="form-label">Nama Lengkap <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="namaLengkap" placeholder="Masukkan nama lengkap"
+                                maxlength="255" required>
+                        </div>
+
+                        <!-- Username -->
+                        <div class="mb-3">
+                            <label class="form-label">Username <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="username" placeholder="Masukkan username"
+                                maxlength="255" required>
+                        </div>
+
+                        <div class="row">
+                            <!-- Jenis Kelamin -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Jenis Kelamin <span class="text-danger">*</span></label>
+                                <select class="form-select" id="jenisKelamin" required>
+                                    <option value="">-- Pilih Jenis Kelamin --</option>
+                                    <option value="Laki-laki">Laki-laki</option>
+                                    <option value="Perempuan">Perempuan</option>
+                                </select>
+                            </div>
+
+                            <!-- Tempat Lahir -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Tempat Lahir <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="tempatLahir"
+                                    placeholder="Masukkan tempat lahir" maxlength="225" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!-- Tanggal Lahir -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Tanggal Lahir <span class="text-danger">*</span></label>
+                                <input type="date" class="form-control" id="tanggalLahir" required>
+                            </div>
+
+                            <!-- Status -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Status</label>
+                                <select class="form-select" id="status">
+                                    <option value="">-- Pilih Status --</option>
+                                    <option value="Belum Kawin">Belum Kawin</option>
+                                    <option value="Kawin">Kawin</option>
+                                    <option value="Cerai Hidup">Cerai Hidup</option>
+                                    <option value="Cerai Mati">Cerai Mati</option>
+                                    <option value="Lainnya">Lainnya</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!-- Departement -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Departement</label>
+                                <select class="form-select" id="departement">
+                                    <option value="">-- Pilih Departement --</option>
+                                    <option value="Produksi BOPP">Produksi BOPP</option>
+                                    <option value="Produksi Slitting">Produksi Slitting</option>
+                                    <option value="WH">WH</option>
+                                    <option value="QA">QA</option>
+                                    <option value="HRD">HRD</option>
+                                    <option value="GA">GA</option>
+                                    <option value="Purchasing">Purchasing</option>
+                                    <option value="Accounting">Accounting</option>
+                                    <option value="Engineering">Engineering</option>
+                                </select>
+                            </div>
+
+                            <!-- Pekerjaan -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Pekerjaan</label>
+                                <select class="form-select" id="pekerjaan">
+                                    <option value="">-- Pilih Pekerjaan --</option>
+                                    <option value="TNI">TNI</option>
+                                    <option value="PNS">PNS</option>
+                                    <option value="Karyawan Swasta">Karyawan Swasta</option>
+                                    <option value="Guru">Guru</option>
+                                    <option value="Buruh">Buruh</option>
+                                    <option value="Tani">Tani</option>
+                                    <option value="Pedagang">Pedagang</option>
+                                    <option value="Wiraswasta">Wiraswasta</option>
+                                    <option value="Mengurus Rumah Tangga">Mengurus Rumah Tangga</option>
+                                    <option value="Lainnya">Lainnya</option>
+                                    <option value="Pensiunan">Pensiunan</option>
+                                    <option value="Penjahit">Penjahit</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Agama -->
+                        <div class="mb-3">
+                            <label class="form-label">Agama</label>
+                            <select class="form-select" id="agama">
+                                <option value="">-- Pilih Agama --</option>
+                                <option value="Islam">Islam</option>
+                                <option value="Katolik">Katolik</option>
+                                <option value="Protestan">Protestan</option>
+                                <option value="Hindu">Hindu</option>
+                                <option value="Budha">Budha</option>
+                                <option value="Lainnya">Lainnya</option>
+                            </select>
+                        </div>
+
+                        <!-- Alamat -->
+                        <div class="mb-3">
+                            <label class="form-label">Alamat <span class="text-danger">*</span></label>
+                            <textarea class="form-control" id="alamat" rows="2" placeholder="Masukkan alamat lengkap"
+                                required></textarea>
+                        </div>
+
+                        <div class="row">
+                            <!-- Kota -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Kota <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="kota" placeholder="Masukkan kota"
+                                    maxlength="255" required>
+                            </div>
+
+                            <!-- No Telepon -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Nomor Telepon / HP</label>
+                                <input type="text" class="form-control" id="noTelp" placeholder="Masukkan nomor telepon"
+                                    maxlength="12">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!-- Tanggal Registrasi -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Tanggal Registrasi <span class="text-danger">*</span></label>
+                                <input type="date" class="form-control" id="tanggalRegistrasi" required>
+                            </div>
+
+                            <!-- Jabatan -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Jabatan <span class="text-danger">*</span></label>
+                                <select class="form-select" id="jabatan" required>
+                                    <option value="">-- Pilih Jabatan --</option>
+                                    <option value="Anggota">Anggota</option>
+                                    <option value="Pengurus">Pengurus</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password"
+                                placeholder="Kosongkan jika tidak ingin ubah">
+                            <small class="text-muted">Kosongkan password jika tidak ingin ubah/isi</small>
+                        </div>
+
+                        <!-- Status Aktif -->
+                        <div class="mb-3">
+                            <label class="form-label">Aktif Keanggotaan <span class="text-danger">*</span></label>
+                            <select class="form-select" id="aktif" required>
+                                <option value="">-- Pilih Status Aktif --</option>
+                                <option value="Aktif">Aktif</option>
+                                <option value="Non Aktif">Non Aktif</option>
+                            </select>
+                        </div>
+
+                        <!-- Photo Upload -->
+                        <div class="mb-3">
+                            <label class="form-label">Photo</label>
+                            <input type="file" class="form-control" id="photo" accept="image/*">
+                            <small class="text-muted">Format: JPG, PNG (Max: 2MB)</small>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-primary" onclick="simpanData()">
+                        <i class="ti ti-device-floppy"></i> Simpan
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="./assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/js/sidebarmenu.js"></script>
+    <script src="./assets/js/app.min.js"></script>
+    <script src="./assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+    <script src="./assets/libs/simplebar/dist/simplebar.js"></script>
+    <script src="./assets/js/dashboard.js"></script>
+    <!-- solar icons -->
+    <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+
+    <!-- DataTables -->
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.bootstrap5.min.js"></script>
+
+    <script>
+        // Load Sidebar
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch("sidebar.html")
+                .then(res => res.text())
+                .then(html => {
+                    document.getElementById("sidebar-container").innerHTML = html;
+                    loadScript("./assets/js/sidebarmenu.js");
+                    loadScript("./assets/js/app.min.js");
+                });
+        });
+
+        function loadScript(src) {
+            const script = document.createElement("script");
+            script.src = src;
+            document.body.appendChild(script);
+        }
+
+        // Data dummy untuk menyimpan data anggota
+        let dataAnggota = [
+            {
+                id: 1,
+                photo: './assets/images/profile/user-1.jpg',
+                idAnggota: 'AG0001',
+                username: 'member1',
+                nama: 'Faisal',
+                jenisKelamin: 'Laki-laki',
+                tempatLahir: 'Jakarta',
+                tanggalLahir: '1995-05-07',
+                status: 'Belum Kawin',
+                departement: 'Produksi BOPP',
+                pekerjaan: 'Lainnya',
+                agama: 'Islam',
+                alamat: 'Duren Sawit, Jakarta Timur',
+                kota: 'Jakarta',
+                noTelp: '089533222331',
+                tanggalRegistrasi: '2023-05-11',
+                jabatan: 'Anggota',
+                aktif: 'Aktif'
+            },
+            {
+                id: 2,
+                photo: './assets/images/profile/user-2.jpg',
+                idAnggota: 'AG0011',
+                username: 'cahyadi001',
+                nama: 'Cahyadi',
+                jenisKelamin: 'Laki-laki',
+                tempatLahir: 'Cirebon',
+                tanggalLahir: '1990-03-15',
+                status: 'Kawin',
+                departement: '',
+                pekerjaan: 'Karyawan Swasta',
+                agama: 'Islam',
+                alamat: 'Jl Swasembada No 69 Kota Cirebon',
+                kota: 'Cirebon',
+                noTelp: '081234567890',
+                tanggalRegistrasi: '2024-06-24',
+                jabatan: 'Anggota',
+                aktif: 'Aktif'
+            }
+        ];
+
+        $(document).ready(function () {
+            $('#tabelDataAnggota').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/id.json'
+                },
+                pageLength: 10,
+                ordering: false,
+                scrollX: true,
+                columnDefs: [
+                    { orderable: false, targets: '_all' }
+                ]
+            });
+        });
+
+
+        // Update Jam
+        function updateJam() {
+            const now = new Date();
+            const jam = now.getHours().toString().padStart(2, '0');
+            const menit = now.getMinutes().toString().padStart(2, '0');
+            const detik = now.getSeconds().toString().padStart(2, '0');
+            document.getElementById('jam').textContent = `${jam}:${menit}:${detik}`;
+        }
+        setInterval(updateJam, 1000);
+        updateJam();
+
+        // Update Tanggal
+        const options = { day: 'numeric', month: 'long', year: 'numeric' };
+        const tanggal = new Date().toLocaleDateString('id-ID', options);
+        document.getElementById('tanggal').textContent = tanggal;
+
+        // Generate ID Anggota otomatis
+        function generateIdAnggota() {
+            const lastId = dataAnggota.length > 0 ? parseInt(dataAnggota[dataAnggota.length - 1].idAnggota.replace('AG', '')) : 0;
+            const newId = (lastId + 1).toString().padStart(4, '0');
+            return 'AG' + newId;
+        }
+
+        // Tambah Data
+        function tambahData() {
+            document.getElementById('modalTitle').textContent = 'Tambah Data Anggota';
+            document.getElementById('formDataAnggota').reset();
+            document.getElementById('editId').value = '';
+
+            // Set tanggal hari ini
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('tanggalRegistrasi').value = today;
+
+            const modal = new bootstrap.Modal(document.getElementById('modalForm'), {
+                backdrop: 'static',
+                keyboard: false
+            });
+            modal.show();
+        }
+
+        // Edit Data
+        function editData(btn) {
+            const row = btn.closest('tr');
+            const id = parseInt(row.getAttribute('data-id'));
+            const anggota = dataAnggota.find(a => a.id === id);
+
+            if (anggota) {
+                document.getElementById('modalTitle').textContent = 'Ubah Data Anggota';
+                document.getElementById('editId').value = anggota.id;
+                document.getElementById('namaLengkap').value = anggota.nama;
+                document.getElementById('username').value = anggota.username;
+                document.getElementById('jenisKelamin').value = anggota.jenisKelamin;
+                document.getElementById('tempatLahir').value = anggota.tempatLahir;
+                document.getElementById('tanggalLahir').value = anggota.tanggalLahir;
+                document.getElementById('status').value = anggota.status;
+                document.getElementById('departement').value = anggota.departement;
+                document.getElementById('pekerjaan').value = anggota.pekerjaan;
+                document.getElementById('agama').value = anggota.agama;
+                document.getElementById('alamat').value = anggota.alamat;
+                document.getElementById('kota').value = anggota.kota;
+                document.getElementById('noTelp').value = anggota.noTelp;
+                document.getElementById('tanggalRegistrasi').value = anggota.tanggalRegistrasi;
+                document.getElementById('jabatan').value = anggota.jabatan;
+                document.getElementById('aktif').value = anggota.aktif;
+
+                const modal = new bootstrap.Modal(document.getElementById('modalForm'), {
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                modal.show();
+            }
+        }
+
+        // Format tanggal dari YYYY-MM-DD ke DD/MM/YYYY
+        function formatTanggal(tanggal) {
+            const [year, month, day] = tanggal.split('-');
+            return `${day}/${month}/${year}`;
+        }
+
+        // Simpan Data
+        function simpanData() {
+            const form = document.getElementById('formDataAnggota');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            const editId = document.getElementById('editId').value;
+            const namaLengkap = document.getElementById('namaLengkap').value;
+            const username = document.getElementById('username').value;
+            const jenisKelamin = document.getElementById('jenisKelamin').value;
+            const tempatLahir = document.getElementById('tempatLahir').value;
+            const tanggalLahir = document.getElementById('tanggalLahir').value;
+            const status = document.getElementById('status').value;
+            const departement = document.getElementById('departement').value;
+            const pekerjaan = document.getElementById('pekerjaan').value;
+            const agama = document.getElementById('agama').value;
+            const alamat = document.getElementById('alamat').value;
+            const kota = document.getElementById('kota').value;
+            const noTelp = document.getElementById('noTelp').value;
+            const tanggalRegistrasi = document.getElementById('tanggalRegistrasi').value;
+            const jabatan = document.getElementById('jabatan').value;
+            const aktif = document.getElementById('aktif').value;
+            const photoFile = document.getElementById('photo').files[0];
+
+            // Handle photo upload (simulasi)
+            let photoUrl = './assets/images/profile/user-1.jpg'; // default
+            if (photoFile) {
+                photoUrl = URL.createObjectURL(photoFile);
+            }
+
+            if (editId) {
+                // Update existing data
+                const id = parseInt(editId);
+                const index = dataAnggota.findIndex(a => a.id === id);
+
+                if (index !== -1) {
+                    const oldPhoto = dataAnggota[index].photo;
+                    dataAnggota[index] = {
+                        ...dataAnggota[index],
+                        nama: namaLengkap,
+                        username: username,
+                        jenisKelamin: jenisKelamin,
+                        tempatLahir: tempatLahir,
+                        tanggalLahir: tanggalLahir,
+                        status: status,
+                        departement: departement,
+                        pekerjaan: pekerjaan,
+                        agama: agama,
+                        alamat: alamat,
+                        kota: kota,
+                        noTelp: noTelp,
+                        tanggalRegistrasi: tanggalRegistrasi,
+                        jabatan: jabatan,
+                        aktif: aktif,
+                        photo: photoFile ? photoUrl : oldPhoto
+                    };
+
+                    // Update table row
+                    updateTableRow(id, dataAnggota[index]);
+                    alert('Data berhasil diubah!');
+                }
+            } else {
+                // Add new data
+                const newId = dataAnggota.length > 0 ? Math.max(...dataAnggota.map(a => a.id)) + 1 : 1;
+                const idAnggota = generateIdAnggota();
+
+                const newAnggota = {
+                    id: newId,
+                    photo: photoUrl,
+                    idAnggota: idAnggota,
+                    username: username,
+                    nama: namaLengkap,
+                    jenisKelamin: jenisKelamin,
+                    tempatLahir: tempatLahir,
+                    tanggalLahir: tanggalLahir,
+                    status: status,
+                    departement: departement,
+                    pekerjaan: pekerjaan,
+                    agama: agama,
+                    alamat: alamat,
+                    kota: kota,
+                    noTelp: noTelp,
+                    tanggalRegistrasi: tanggalRegistrasi,
+                    jabatan: jabatan,
+                    aktif: aktif
+                };
+
+                dataAnggota.push(newAnggota);
+                addTableRow(newAnggota);
+                alert('Data berhasil ditambahkan!');
+            }
+
+            const modal = bootstrap.Modal.getInstance(document.getElementById('modalForm'));
+            modal.hide();
+        }
+
+        // Update table row
+        function updateTableRow(id, anggota) {
+            const rows = document.querySelectorAll('#tabelDataAnggota tbody tr');
+            rows.forEach(row => {
+                if (parseInt(row.getAttribute('data-id')) === id) {
+                    const jkBadge = anggota.jenisKelamin === 'Laki-laki' ?
+                        '<span class="badge bg-info-subtle text-info fw-semibold">Laki-laki</span>' :
+                        '<span class="badge bg-pink-subtle text-pink fw-semibold">Perempuan</span>';
+
+                    const statusBadge = anggota.aktif === 'Aktif' ?
+                        '<span class="badge bg-success-subtle text-success fw-semibold">Aktif</span>' :
+                        '<span class="badge bg-danger-subtle text-danger fw-semibold">Non Aktif</span>';
+
+                    row.cells[0].innerHTML = `<img src="${anggota.photo}" class="rounded-circle" width="40" height="40">`;
+                    row.cells[1].innerHTML = `<span class="badge bg-primary-subtle text-primary fw-semibold">${anggota.idAnggota}</span>`;
+                    row.cells[2].innerHTML = `<div class="fw-semibold text-dark">${anggota.username}</div>`;
+                    row.cells[3].innerHTML = `<div class="fw-semibold text-dark">${anggota.nama}</div>`;
+                    row.cells[4].innerHTML = jkBadge;
+                    row.cells[5].innerHTML = anggota.alamat;
+                    row.cells[6].innerHTML = anggota.kota;
+                    row.cells[7].innerHTML = anggota.jabatan;
+                    row.cells[8].innerHTML = anggota.departement || '-';
+                    row.cells[9].innerHTML = formatTanggal(anggota.tanggalRegistrasi);
+                    row.cells[10].innerHTML = statusBadge;
+                }
+            });
+        }
+
+        // Add new table row
+        function addTableRow(anggota) {
+            const jkBadge = anggota.jenisKelamin === 'Laki-laki' ?
+                '<span class="badge bg-info-subtle text-info fw-semibold">Laki-laki</span>' :
+                '<span class="badge bg-pink-subtle text-pink fw-semibold">Perempuan</span>';
+
+            const statusBadge = anggota.aktif === 'Aktif' ?
+                '<span class="badge bg-success-subtle text-success fw-semibold">Aktif</span>' :
+                '<span class="badge bg-danger-subtle text-danger fw-semibold">Non Aktif</span>';
+
+            const newRow = `
+        <tr data-id="${anggota.id}">
+          <td class="text-center">
+            <img src="${anggota.photo}" class="rounded-circle" width="40" height="40">
+          </td>
+          <td class="text-center">
+            <span class="badge bg-primary-subtle text-primary fw-semibold">${anggota.idAnggota}</span>
+          </td>
+          <td>
+            <div class="fw-semibold text-dark">${anggota.username}</div>
+          </td>
+          <td>
+            <div class="fw-semibold text-dark">${anggota.nama}</div>
+          </td>
+          <td class="text-center">${jkBadge}</td>
+          <td>${anggota.alamat}</td>
+          <td>${anggota.kota}</td>
+          <td>${anggota.jabatan}</td>
+          <td>${anggota.departement || '-'}</td>
+          <td class="text-center">${formatTanggal(anggota.tanggalRegistrasi)}</td>
+          <td class="text-center">${statusBadge}</td>
+          <td class="text-center">
+            <button class="btn btn-sm btn-warning me-1" onclick="editData(this)" title="Edit">
+              <i class="ti ti-edit"></i>
+            </button>
+            <button class="btn btn-sm btn-danger" onclick="hapusData(this)" title="Hapus">
+              <i class="ti ti-trash"></i>
+            </button>
+          </td>
+        </tr>
+      `;
+            table.row.add($(newRow)).draw();
+        }
+
+        // Hapus Data
+        function hapusData(btn) {
+            if (confirm('Apakah Anda yakin ingin menghapus data anggota ini?')) {
+                const row = btn.closest('tr');
+                const id = parseInt(row.getAttribute('data-id'));
+
+                // Remove from data array
+                const index = dataAnggota.findIndex(a => a.id === id);
+                if (index !== -1) {
+                    dataAnggota.splice(index, 1);
+                }
+
+                // Remove from table
+                table.row(row).remove().draw();
+                alert('Data berhasil dihapus!');
+            }
+        }
+
+        // Cari Data
+        function cariData() {
+            const search = document.getElementById('searchInput').value;
+            table.search(search).draw();
+        }
+
+        // Reset Filter
+        function resetFilter() {
+            document.getElementById('searchInput').value = '';
+            table.search('').draw();
+        }
+
+        // Cetak Laporan
+        function cetakLaporan() {
+            window.print();
+        }
+
+        // Ekspor Data ke Excel
+        function eksporData() {
+            const rows = [];
+            const headers = ['No', 'ID Anggota', 'Username', 'Nama Lengkap', 'Jenis Kelamin', 'Alamat', 'Kota', 'Jabatan', 'Departement', 'Tanggal Registrasi', 'Status'];
+            rows.push(headers);
+
+            table.rows({ search: 'applied' }).every(function (index) {
+                const row = this.node();
+                const id = parseInt(row.getAttribute('data-id'));
+                const anggota = dataAnggota.find(a => a.id === id);
+
+                if (anggota) {
+                    rows.push([
+                        index + 1,
+                        anggota.idAnggota,
+                        anggota.username,
+                        anggota.nama,
+                        anggota.jenisKelamin,
+                        anggota.alamat,
+                        anggota.kota,
+                        anggota.jabatan,
+                        anggota.departement || '-',
+                        formatTanggal(anggota.tanggalRegistrasi),
+                        anggota.aktif
+                    ]);
+                }
+            });
+
+            let csvContent = '\ufeff';
+            csvContent += rows.map(row => row.join(',')).join('\n');
+
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+
+            const tanggal = new Date().toISOString().slice(0, 10);
+            link.setAttribute('href', url);
+            link.setAttribute('download', `Data_Anggota_${tanggal}.csv`);
+            link.style.visibility = 'hidden';
+
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+    </script>
+</body>
+
+</html>
