@@ -5,13 +5,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Laporan - KOPERASI</title>
-    <link rel="shortcut icon" type="image/png" href="./assets/images/logos/favicon.png" />
+    <link rel="shortcut icon" type="image/png" href="./assets/images/logos/logoAkeno-no-name.png" />
     <link rel="stylesheet" href="./assets/css/styles.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <!-- Select2 -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css"
+        rel="stylesheet" />
 </head>
 
 <body>
@@ -81,7 +82,8 @@
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up">
                                     <a href="#" class="dropdown-item"><i class="ti ti-user"></i> Profil Saya</a>
                                     <a href="#" class="dropdown-item"><i class="ti ti-key"></i> Ubah Password</a>
-                                    <a href="https://ksp.walproject.net/login/logout" class="btn btn-outline-primary mx-2 mt-2 d-block">Logout</a>
+                                    <a href="https://ksp.walproject.net/login/logout"
+                                        class="btn btn-outline-primary mx-2 mt-2 d-block">Logout</a>
                                 </div>
                             </li>
                         </ul>
@@ -116,7 +118,7 @@
                                 <input type="hidden" id="js_modal" name="js_modal" value="-739586.4">
                                 <input type="hidden" id="tot_pendpatan" name="tot_pendpatan" value="-6487600">
                                 <input type="hidden" id="tot_simpanan" name="tot_simpanan" value="100000">
-                                
+
                                 <div class="row g-3">
                                     <div class="col-md-4">
                                         <label class="form-label fw-semibold mb-2">
@@ -150,7 +152,8 @@
                                             <button type="button" class="btn btn-info" onclick="cetak()">
                                                 <i class="ti ti-printer"></i> Cetak
                                             </button>
-                                            <button type="button" class="btn btn-outline-secondary" onclick="clearSearch()">
+                                            <button type="button" class="btn btn-outline-secondary"
+                                                onclick="clearSearch()">
                                                 <i class="ti ti-refresh"></i> Reset
                                             </button>
                                         </div>
@@ -163,24 +166,28 @@
                     <!-- Data Table Card -->
                     <div class="card shadow-sm mt-3">
                         <div class="card-body">
-                             <div class="table-responsive shadow-sm rounded-2 border">
+                            <div class="table-responsive shadow-sm rounded-2 border">
                                 <table id="tabelJatuhTempo" class="table table-hover align-middle mb-0"
                                     style="width:100%">
                                     <tbody>
                                         <tr class="table-light">
-                                            <td class="h_kiri header_kolom" colspan="2"><strong>SHU Sebelum Pajak</strong></td>
+                                            <td class="h_kiri header_kolom" colspan="2"><strong>SHU Sebelum
+                                                    Pajak</strong></td>
                                             <td class="h_kanan header_kolom"><strong>-6,487,600</strong></td>
                                         </tr>
                                         <tr class="table-light">
-                                            <td class="h_kiri header_kolom" colspan="2"><strong>Pajak PPh (5%)</strong></td>
+                                            <td class="h_kiri header_kolom" colspan="2"><strong>Pajak PPh (5%)</strong>
+                                            </td>
                                             <td class="h_kanan header_kolom"><strong>-324,380</strong></td>
                                         </tr>
                                         <tr class="table-light">
-                                            <td class="h_kiri header_kolom" colspan="2"><strong>SHU Setelah Pajak</strong></td>
+                                            <td class="h_kiri header_kolom" colspan="2"><strong>SHU Setelah
+                                                    Pajak</strong></td>
                                             <td class="h_kanan header_kolom"><strong>-6,163,220</strong></td>
                                         </tr>
                                         <tr>
-                                            <td colspan="3" class="pt-4"><strong>PEMBAGIAN SHU UNTUK DANA-DANA</strong></td>
+                                            <td colspan="3" class="pt-4"><strong>PEMBAGIAN SHU UNTUK DANA-DANA</strong>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Dana Cadangan</td>
@@ -227,7 +234,8 @@
                                         </tr>
                                         <tr class="table-light">
                                             <td class="header_kolom"><strong>Total Pendapatan Anggota</strong></td>
-                                            <td colspan="2" class="h_kanan header_kolom"><strong>-6,487,600</strong></td>
+                                            <td colspan="2" class="h_kanan header_kolom"><strong>-6,487,600</strong>
+                                            </td>
                                         </tr>
                                         <tr class="table-light">
                                             <td class="header_kolom"><strong>Total Simpanan Anggota</strong></td>
@@ -295,7 +303,7 @@
         document.getElementById('tanggal').textContent = tanggal;
 
         // Initialize Select2
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#anggota_id').select2({
                 theme: 'bootstrap-5',
                 placeholder: '-- Pilih Anggota --',
@@ -314,12 +322,12 @@
                 startDate: '2025-01-01',
                 endDate: '2025-12-31'
             },
-            function (start, end) {
-                doSearch();
-            });
+                function (start, end) {
+                    doSearch();
+                });
         });
 
-        function clearSearch(){
+        function clearSearch() {
             window.location.href = 'https://ksp.walproject.net/lap_shu';
         }
 
@@ -332,7 +340,7 @@
             $('#fmCari').submit();
         }
 
-        function cetak () {	
+        function cetak() {
             var anggota_id = $("input[name=anggota_id]").val();
             var tgl_dari = $('input[name=daterangepicker_start]').val();
             var tgl_samp = $('input[name=daterangepicker_end]').val();
@@ -344,7 +352,7 @@
             $('input[name=tgl_dari]').val(tgl_dari);
             $('input[name=tgl_samp]').val(tgl_samp);
 
-            var win = window.open('https://ksp.walproject.net/lap_shu_anggota/cetak_laporan/?anggota_id=' + anggota_id + '&tgl_dari='+ tgl_dari +'&tgl_samp='+ tgl_samp +'&js_modal='+ js_modal +'&js_usaha='+ js_usaha +'&tot_pendpatan='+ tot_pendpatan +'&tot_simpanan='+ tot_simpanan +'');
+            var win = window.open('https://ksp.walproject.net/lap_shu_anggota/cetak_laporan/?anggota_id=' + anggota_id + '&tgl_dari=' + tgl_dari + '&tgl_samp=' + tgl_samp + '&js_modal=' + js_modal + '&js_usaha=' + js_usaha + '&tot_pendpatan=' + tot_pendpatan + '&tot_simpanan=' + tot_simpanan + '');
             if (win) {
                 win.focus();
             } else {
@@ -357,12 +365,15 @@
         .h_tengah {
             text-align: center;
         }
+
         .h_kanan {
             text-align: right;
         }
+
         .h_kiri {
             text-align: left;
         }
+
         .header_kolom {
             font-weight: 600;
         }

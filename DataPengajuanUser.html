@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Data Pengajuan Saya - Sistem Koperasi Bina Tirta Lestari</title>
+    <link rel="shortcut icon" type="image/png" href="./assets/images/logos/logoAkeno-no-name.png" />
+    <link rel="stylesheet" href="./assets/css/styles.min.css" />
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.bootstrap5.min.css">
+    <style>
+        .body-wrapper .user-area>.container-fluid {
+            padding-top: 100px;
+        }
+
+        .body-wrapper.beranda-user .container-fluid,
+        .body-wrapper.beranda-user .container-sm,
+        .body-wrapper.beranda-user .container-md,
+        .body-wrapper.beranda-user .container-lg,
+        .body-wrapper.beranda-user .container-xl,
+        .body-wrapper.beranda-user .container-xxl {
+            max-width: 95%;
+            padding-left: 32px;
+            padding-right: 32px;
+            padding-top: 113px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6">
+
+        <!-- App Topstrip -->
+        <div class="app-topstrip bg-dark py-6 px-3 w-100 d-lg-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center justify-content-center gap-5 mb-2 mb-lg-0">
+                <a class="d-flex justify-content-center" href="#">
+                    <img src="assets/images/logos/logo-wrappixel.svg" alt="" width="150" height="37">
+                </a>
+            </div>
+        </div>
+
+        <!-- Main wrapper -->
+        <div class="body-wrapper beranda-user">
+            <!-- Header Start -->
+            <header class="app-header shadow-sm">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold" href="#"> Member Area
+                            </a>
+                        </li>
+                    </ul>
+                    <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-3">
+                            <li class="nav-item">
+                                <a class="nav-link" href="Beranda.html"><i class="ti ti-home me-1"></i> Beranda</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle active" href="#" data-bs-toggle="dropdown">
+                                    <i class="ti ti-file-text me-1"></i> Pengajuan Pinjaman
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item active" href="DataPengajuanUser.html">Data Pengajuan</a>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="FormPengajuanUser.html">Tambah Pengajuan Baru</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                                    <i class="ti ti-report me-1"></i> Laporan
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="Simpanan.html">Simpanan</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="Pinjaman.html">Pinjaman</a></li>
+                                    <li><a class="dropdown-item" href="Pembayaran.html">Pembayaran</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="navbar-collapse justify-content-end px-0">
+                        <ul class="navbar-nav flex-row ms-auto align-items-center">
+                            <li class="nav-item me-3">
+                                <span class="text-dark">
+                                    <i class="ti ti-calendar"></i> <span id="tanggal">24 December 2025</span>
+                                    <i class="ti ti-clock ms-2"></i> <span id="jam">00:00:00</span>
+                                </span>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" href="javascript:void(0)" data-bs-toggle="dropdown">
+                                    <img src="./assets/images/profile/user-1.jpg" width="35" height="35"
+                                        class="rounded-circle">
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up">
+                                    <a href="#" class="dropdown-item"><i class="ti ti-user"></i> Profil Saya</a>
+                                    <a href="#" class="dropdown-item"><i class="ti ti-camera"></i> Ubah Foto</a>
+                                    <a href="#" class="dropdown-item"><i class="ti ti-key"></i> Ubah Password</a>
+                                    <a href="#" class="btn btn-outline-primary mx-2 mt-2 d-block">Logout</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+
+            <div class="body-wrapper-inner user-area">
+                <div class="container-fluid">
+                    <!-- Page Header -->
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h4 class="fw-semibold mb-1">Data Pengajuan Pinjaman Saya</h4>
+                                    <p class="text-muted fs-3 mb-0">Kelola pengajuan pinjaman Anda</p>
+                                </div>
+                                <div>
+                                    <a href="FormPengajuanUser.html" class="btn btn-primary">
+                                        <i class="ti ti-plus"></i> Tambah Pengajuan Baru
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Info Alert -->
+                    <div class="alert alert-info alert-dismissible fade show mb-3" role="alert">
+                        <i class="ti ti-info-circle me-2"></i>
+                        <strong>Informasi:</strong> Anda dapat mengubah nominal, lama angsuran, dan keterangan pada
+                        pengajuan dengan status "Menunggu Konfirmasi".
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+
+                    <!-- Data Table Card -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="tabelPengajuan"
+                                    class="table table-hover align-middle rounded-2 border overflow-hidden"
+                                    style="width:100%">
+                                    <thead class="table-primary">
+                                        <tr>
+                                            <th class="text-center align-middle">Tanggal</th>
+                                            <th class="text-center align-middle">Jenis</th>
+                                            <th width="150px" class="text-end align-middle">Jumlah</th>
+                                            <th class="text-center align-middle" title="Jumlah Angsuran (Bulan)">Jumlah
+                                                Angsuran</th>
+                                            <th width="200px" class="align-middle">Keterangan</th>
+                                            <th width="150px" class="align-middle">Alasan</th>
+                                            <th class="text-center align-middle">Tanggal Update</th>
+                                            <th width="130px" class="text-center align-middle">Status</th>
+                                            <th class="text-center align-middle">Opsi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Sample Data Row 1 - Menunggu Konfirmasi -->
+                                        <tr>
+                                            <td class="text-center text-muted">15 Des 2025</td>
+                                            <td class="text-center">
+                                                <span class="badge bg-info-subtle text-info">Biasa</span>
+                                            </td>
+                                            <td class="text-end">
+                                                <a href="javascript:void(0)"
+                                                    class="editable-nominal text-decoration-none fw-bold text-success"
+                                                    data-id="1" data-value="10000000">
+                                                    Rp 10.000.000
+                                                </a>
+                                            </td>
+                                            <td class="text-center">
+                                                <a href="javascript:void(0)"
+                                                    class="editable-angsuran text-decoration-none" data-id="1"
+                                                    data-value="12">
+                                                    <span class="badge bg-secondary">12</span>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="javascript:void(0)"
+                                                    class="editable-keterangan text-decoration-none" data-id="1"
+                                                    data-value="Untuk renovasi rumah">
+                                                    Untuk renovasi rumah
+                                                </a>
+                                            </td>
+                                            <td class="text-muted">-</td>
+                                            <td class="text-center text-muted">15 Des 2025</td>
+                                            <td class="text-center">
+                                                <span class="text-primary">
+                                                    <i class="ti ti-clock"></i> Menunggu<br>Konfirmasi
+                                                </span>
+                                            </td>
+                                            <td class="text-center">
+                                                <button class="btn btn-danger btn-sm" onclick="batalkanPengajuan(1)">
+                                                    <i class="ti ti-ban"></i> Batal
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Sample Data Row 2 - Disetujui -->
+                                        <tr>
+                                            <td class="text-center text-muted">10 Des 2025</td>
+                                            <td class="text-center">
+                                                <span class="badge bg-warning-subtle text-warning">Darurat</span>
+                                            </td>
+                                            <td class="text-end">
+                                                <span class="fw-bold text-success">Rp 5.000.000</span>
+                                            </td>
+                                            <td class="text-center">
+                                                <span class="badge bg-secondary">1</span>
+                                            </td>
+                                            <td>Keperluan medis mendesak</td>
+                                            <td class="text-success">Disetujui untuk pencairan</td>
+                                            <td class="text-center text-muted">10 Des 2025</td>
+                                            <td class="text-center">
+                                                <span class="text-success">
+                                                    <i class="ti ti-check"></i> Disetujui<br>
+                                                    <small>Cair: 10 Des 2025</small>
+                                                </span>
+                                            </td>
+                                            <td class="text-center">
+                                                <button class="btn btn-secondary btn-sm" onclick="cetakPengajuan(2)">
+                                                    <i class="ti ti-printer"></i> Cetak
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Sample Data Row 3 - Ditolak -->
+                                        <tr>
+                                            <td class="text-center text-muted">05 Des 2025</td>
+                                            <td class="text-center">
+                                                <span class="badge bg-danger-subtle text-danger">Barang</span>
+                                            </td>
+                                            <td class="text-end">
+                                                <span class="fw-bold text-muted">Rp 15.000.000</span>
+                                            </td>
+                                            <td class="text-center">
+                                                <span class="badge bg-secondary">24</span>
+                                            </td>
+                                            <td>Pembelian motor</td>
+                                            <td class="text-danger">Sisa pinjaman masih banyak</td>
+                                            <td class="text-center text-muted">05 Des 2025</td>
+                                            <td class="text-center">
+                                                <span class="text-danger">
+                                                    <i class="ti ti-x"></i> Ditolak
+                                                </span>
+                                            </td>
+                                            <td class="text-center">
+                                                <span class="text-muted">-</span>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Sample Data Row 4 - Terlaksana -->
+                                        <tr>
+                                            <td class="text-center text-muted">01 Des 2025</td>
+                                            <td class="text-center">
+                                                <span class="badge bg-info-subtle text-info">Biasa</span>
+                                            </td>
+                                            <td class="text-end">
+                                                <span class="fw-bold text-success">Rp 8.000.000</span>
+                                            </td>
+                                            <td class="text-center">
+                                                <span class="badge bg-secondary">12</span>
+                                            </td>
+                                            <td>Modal usaha sampingan</td>
+                                            <td class="text-success">Sudah dicairkan</td>
+                                            <td class="text-center text-muted">01 Des 2025</td>
+                                            <td class="text-center">
+                                                <span class="text-success">
+                                                    <i class="ti ti-rocket"></i> Terlaksana
+                                                </span>
+                                            </td>
+                                            <td class="text-center">
+                                                <button class="btn btn-secondary btn-sm" onclick="cetakPengajuan(4)">
+                                                    <i class="ti ti-printer"></i> Cetak
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Sample Data Row 5 - Batal -->
+                                        <tr>
+                                            <td class="text-center text-muted">28 Nov 2025</td>
+                                            <td class="text-center">
+                                                <span class="badge bg-info-subtle text-info">Biasa</span>
+                                            </td>
+                                            <td class="text-end">
+                                                <span class="fw-bold text-muted">Rp 12.000.000</span>
+                                            </td>
+                                            <td class="text-center">
+                                                <span class="badge bg-secondary">18</span>
+                                            </td>
+                                            <td>Biaya pendidikan anak</td>
+                                            <td class="text-muted">Dibatalkan oleh anggota</td>
+                                            <td class="text-center text-muted">28 Nov 2025</td>
+                                            <td class="text-center">
+                                                <span class="text-warning">
+                                                    <i class="ti ti-ban"></i> Batal
+                                                </span>
+                                            </td>
+                                            <td class="text-center">
+                                                <span class="text-muted">-</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="py-6 px-6 text-center mt-4">
+                        <p class="mb-0 fs-4">Sistem Koperasi <strong>Akeno Multimedia Solution</strong> &copy; 2025</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="./assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+
+    <!-- DataTables -->
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        // Initialize DataTable
+        let table;
+        $(document).ready(function () {
+            table = $('#tabelPengajuan').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/id.json'
+                },
+                pageLength: 10,
+                order: [[0, 'desc']],
+                columnDefs: [
+                    { orderable: false, targets: [8] }
+                ]
+            });
+
+            // Editable Nominal
+            $('.editable-nominal').on('click', function () {
+                const id = $(this).data('id');
+                const currentValue = $(this).data('value');
+
+                Swal.fire({
+                    title: 'Ubah Nominal',
+                    html: `
+            <div class="text-start">
+              <label class="form-label fw-semibold">Nominal Baru</label>
+              <input type="text" id="swal-nominal" class="form-control" value="${formatRupiah(currentValue)}">
+            </div>
+          `,
+                    showCancelButton: true,
+                    confirmButtonText: '<i class="ti ti-check"></i> Simpan',
+                    cancelButtonText: '<i class="ti ti-x"></i> Batal',
+                    confirmButtonColor: '#0d6efd',
+                    preConfirm: () => {
+                        const nominal = $('#swal-nominal').val().replace(/[^0-9]/g, '');
+                        if (!nominal || nominal == '0') {
+                            Swal.showValidationMessage('Nominal wajib diisi!');
+                            return false;
+                        }
+                        return { nominal };
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        updateData('nominal', id, result.value.nominal);
+                    }
+                });
+
+                // Format input saat mengetik
+                $('#swal-nominal').on('keyup', function () {
+                    const val = $(this).val().replace(/[^0-9]/g, '');
+                    $(this).val(formatRupiah(val));
+                });
+            });
+
+            // Editable Lama Angsuran
+            $('.editable-angsuran').on('click', function () {
+                const id = $(this).data('id');
+                const currentValue = $(this).data('value');
+
+                Swal.fire({
+                    title: 'Ubah Lama Angsuran',
+                    html: `
+            <div class="text-start">
+              <label class="form-label fw-semibold">Pilih Lama Angsuran (Bulan)</label>
+              <select id="swal-angsuran" class="form-select">
+                <option value="1" ${currentValue == 1 ? 'selected' : ''}>1 bulan</option>
+                <option value="3" ${currentValue == 3 ? 'selected' : ''}>3 bulan</option>
+                <option value="6" ${currentValue == 6 ? 'selected' : ''}>6 bulan</option>
+                <option value="12" ${currentValue == 12 ? 'selected' : ''}>12 bulan</option>
+                <option value="24" ${currentValue == 24 ? 'selected' : ''}>24 bulan</option>
+                <option value="36" ${currentValue == 36 ? 'selected' : ''}>36 bulan</option>
+              </select>
+            </div>
+          `,
+                    showCancelButton: true,
+                    confirmButtonText: '<i class="ti ti-check"></i> Simpan',
+                    cancelButtonText: '<i class="ti ti-x"></i> Batal',
+                    confirmButtonColor: '#0d6efd',
+                    preConfirm: () => {
+                        return { angsuran: $('#swal-angsuran').val() };
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        updateData('lama_ags', id, result.value.angsuran);
+                    }
+                });
+            });
+
+            // Editable Keterangan
+            $('.editable-keterangan').on('click', function () {
+                const id = $(this).data('id');
+                const currentValue = $(this).data('value');
+
+                Swal.fire({
+                    title: 'Ubah Keterangan',
+                    html: `
+            <div class="text-start">
+              <label class="form-label fw-semibold">Keterangan Baru</label>
+              <textarea id="swal-keterangan" class="form-control" rows="3">${currentValue}</textarea>
+            </div>
+          `,
+                    showCancelButton: true,
+                    confirmButtonText: '<i class="ti ti-check"></i> Simpan',
+                    cancelButtonText: '<i class="ti ti-x"></i> Batal',
+                    confirmButtonColor: '#0d6efd',
+                    preConfirm: () => {
+                        const keterangan = $('#swal-keterangan').val().trim();
+                        if (!keterangan) {
+                            Swal.showValidationMessage('Keterangan wajib diisi!');
+                            return false;
+                        }
+                        return { keterangan };
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        updateData('keterangan', id, result.value.keterangan);
+                    }
+                });
+            });
+        });
+
+        // Update Jam Real-time
+        function updateJam() {
+            const now = new Date();
+            const jam = now.getHours().toString().padStart(2, '0');
+            const menit = now.getMinutes().toString().padStart(2, '0');
+            const detik = now.getSeconds().toString().padStart(2, '0');
+            document.getElementById('jam').textContent = `${jam}:${menit}:${detik}`;
+        }
+        setInterval(updateJam, 1000);
+        updateJam();
+
+        // Update Tanggal
+        const options = { day: 'numeric', month: 'long', year: 'numeric' };
+        const tanggal = new Date().toLocaleDateString('id-ID', options);
+        document.getElementById('tanggal').textContent = tanggal;
+
+        // Function: Format Rupiah
+        function formatRupiah(angka) {
+            if (!angka) return '0';
+            const number = angka.toString().replace(/[^0-9]/g, '');
+            return 'Rp ' + number.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        }
+
+        // Function: Update Data
+        function updateData(field, id, value) {
+            Swal.fire({
+                title: 'Memproses...',
+                text: 'Mohon tunggu sebentar',
+                allowOutsideClick: false,
+                showConfirmButton: false,
+                willOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+
+            // Simulate AJAX
+            setTimeout(() => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil!',
+                    text: 'Data berhasil diperbarui',
+                    timer: 1500,
+                    showConfirmButton: false
+                }).then(() => {
+                    location.reload();
+                });
+
+                /* Production AJAX:
+                $.ajax({
+                  url: 'member/edit',
+                  type: 'POST',
+                  data: { 
+                    pk: id, 
+                    name: field, 
+                    value: value 
+                  },
+                  success: function(response) {
+                    Swal.fire({
+                      icon: 'success',
+                      title: 'Berhasil!',
+                      text: 'Data berhasil diperbarui',
+                      timer: 1500
+                    }).then(() => location.reload());
+                  },
+                  error: function() {
+                    Swal.fire({
+                      icon: 'error',
+                      title: 'Gagal!',
+                      text: 'Terjadi kesalahan saat memperbarui data'
+                    });
+                  }
+                });
+                */
+            }, 1000);
+        }
+
+        // Function: Batalkan Pengajuan
+        function batalkanPengajuan(id) {
+            Swal.fire({
+                title: 'Batalkan Pengajuan?',
+                text: 'Pengajuan akan dibatalkan dan tidak dapat dikembalikan',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: '<i class="ti ti-ban"></i> Ya, Batalkan',
+                cancelButtonText: '<i class="ti ti-x"></i> Tidak',
+                confirmButtonColor: '#dc3545',
+                customClass: {
+                    confirmButton: 'btn btn-danger',
+                    cancelButton: 'btn btn-secondary'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'Memproses...',
+                        allowOutsideClick: false,
+                        showConfirmButton: false,
+                        willOpen: () => {
+                            Swal.showLoading();
+                        }
+                    });
+
+                    setTimeout(() => {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil!',
+                            text: 'Pengajuan berhasil dibatalkan',
+                            timer: 2000,
+                            showConfirmButton: false
+                        }).then(() => {
+                            location.reload();
+                        });
+
+                        /* Production AJAX:
+                        $.ajax({
+                          url: 'member/pengajuan_batal/' + id,
+                          type: 'POST',
+                          success: function(response) {
+                            Swal.fire({
+                              icon: 'success',
+                              title: 'Berhasil!',
+                              text: 'Pengajuan berhasil dibatalkan',
+                              timer: 2000
+                            }).then(() => location.reload());
+                          }
+                        });
+                        */
+                    }, 1000);
+                }
+            });
+        }
+
+        // Function: Cetak Pengajuan
+        function cetakPengajuan(id) {
+            const url = `cetak_pengajuan.php?id=${id}`;
+            window.open(url, '_blank');
+        }
+
+        // Initialize Bootstrap Tooltips
+        document.addEventListener('DOMContentLoaded', function () {
+            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+    </script>
+
+</body>
+
+</html>

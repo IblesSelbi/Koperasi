@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Jenis Simpanan - Sistem Koperasi Bina Tirta Lestari</title>
-  <link rel="shortcut icon" type="image/png" href="./assets/images/logos/favicon.png" />
+  <link rel="shortcut icon" type="image/png" href="./assets/images/logos/logoAkeno-no-name.png" />
   <link rel="stylesheet" href="./assets/css/styles.min.css" />
   <!-- DataTables CSS -->
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
@@ -256,7 +256,8 @@
             <input type="hidden" id="editId" value="">
             <div class="mb-3">
               <label class="form-label">Jenis Simpanan <span class="text-danger">*</span></label>
-              <input type="text" class="form-control" id="jnsSimpanan" placeholder="Masukkan jenis simpanan" maxlength="30" required>
+              <input type="text" class="form-control" id="jnsSimpanan" placeholder="Masukkan jenis simpanan"
+                maxlength="30" required>
             </div>
             <div class="mb-3">
               <label class="form-label">Jumlah</label>
@@ -321,7 +322,7 @@
 
     // Init DataTable
     let table;
-    $(document).ready(function() {
+    $(document).ready(function () {
       table = $('#tabelJenisSimpanan').DataTable({
         language: {
           url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/id.json'
@@ -417,7 +418,7 @@
             row.setAttribute('data-jns', jnsSimpanan);
             row.setAttribute('data-jumlah', jumlah);
             row.setAttribute('data-tampil', tampil);
-            
+
             row.cells[1].innerHTML = `<div class="fw-semibold text-dark">${jnsSimpanan}</div>`;
             row.cells[2].innerHTML = `<span class="fw-bold text-dark">Rp ${formatRupiah(jumlah)}</span>`;
             row.cells[3].innerHTML = `<span class="badge bg-${tampil === 'Y' ? 'success' : 'danger'}-subtle text-${tampil === 'Y' ? 'success' : 'danger'} fw-semibold px-3 py-1">${tampil}</span>`;
@@ -485,13 +486,13 @@
       rows.push(headers);
 
       // Ambil data dari DataTable
-      table.rows({ search: 'applied' }).every(function() {
+      table.rows({ search: 'applied' }).every(function () {
         const row = this.node();
         const jns = row.getAttribute('data-jns');
         const jumlah = row.getAttribute('data-jumlah');
         const tampil = row.getAttribute('data-tampil');
         const no = this.index() + 1;
-        
+
         rows.push([no, jns, jumlah, tampil]);
       });
 
@@ -503,12 +504,12 @@
       const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
       const link = document.createElement('a');
       const url = URL.createObjectURL(blob);
-      
+
       const tanggal = new Date().toISOString().slice(0, 10);
       link.setAttribute('href', url);
       link.setAttribute('download', `Jenis_Simpanan_${tanggal}.csv`);
       link.style.visibility = 'hidden';
-      
+
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);

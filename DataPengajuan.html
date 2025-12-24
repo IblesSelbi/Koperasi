@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Data Pengajuan Pinjaman - Sistem Koperasi Bina Tirta Lestari</title>
-  <link rel="shortcut icon" type="image/png" href="./assets/images/logos/favicon.png" />
+  <link rel="shortcut icon" type="image/png" href="./assets/images/logos/logoAkeno-no-name.png" />
   <link rel="stylesheet" href="./assets/css/styles.min.css" />
   <!-- DataTables CSS -->
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
@@ -110,10 +110,9 @@
                   <label class="form-label fw-semibold mb-2">
                     <i class="ti ti-calendar text-primary"></i> Rentang Tanggal
                   </label>
-                  <input type="text" class="form-control" id="filterTanggal" 
-                         placeholder="Pilih tanggal..." readonly>
+                  <input type="text" class="form-control" id="filterTanggal" placeholder="Pilih tanggal..." readonly>
                 </div>
-                
+
                 <!-- Filter Jenis -->
                 <div class="col-md-6 col-lg-2">
                   <label class="form-label fw-semibold mb-2">
@@ -126,7 +125,7 @@
                     <option value="Barang">Barang</option>
                   </select>
                 </div>
-                
+
                 <!-- Filter Status -->
                 <div class="col-md-6 col-lg-3">
                   <label class="form-label fw-semibold mb-2">
@@ -141,17 +140,16 @@
                     <option value="4">Batal</option>
                   </select>
                 </div>
-                
+
                 <!-- Filter Bulan -->
                 <div class="col-md-6 col-lg-2">
                   <label class="form-label fw-semibold mb-2">
                     <i class="ti ti-calendar-month text-warning"></i> Per Bulan
                   </label>
-                  <input type="text" class="form-control" id="filterBulan" 
-                         placeholder="YYYY-MM" readonly 
-                         title="Filter Untuk Per Tanggal 21 Sampai 20">
+                  <input type="text" class="form-control" id="filterBulan" placeholder="YYYY-MM" readonly
+                    title="Filter Untuk Per Tanggal 21 Sampai 20">
                 </div>
-                
+
                 <!-- Action Buttons -->
                 <div class="col-md-12 col-lg-2">
                   <label class="form-label fw-semibold mb-2 d-none d-lg-block">&nbsp;</label>
@@ -159,14 +157,14 @@
                     <button class="btn btn-primary w-100" onclick="filterData()">
                       <i class="ti ti-search"></i> Terapkan
                     </button>
-                    <button class="btn btn-outline-secondary" onclick="resetFilter()" 
-                            data-bs-toggle="tooltip" title="Reset Filter">
+                    <button class="btn btn-outline-secondary" onclick="resetFilter()" data-bs-toggle="tooltip"
+                      title="Reset Filter">
                       <i class="ti ti-refresh"></i>
                     </button>
                   </div>
                 </div>
               </div>
-              
+
               <!-- Secondary Actions -->
               <div class="row mt-3 pt-3 border-top">
                 <div class="col-12">
@@ -219,7 +217,8 @@
                       </td>
                       <td class="text-center text-muted">15 Des 2025</td>
                       <td>
-                        <a href="javascript:void(0)" title="Lihat History Pinjaman Anggota" class="text-decoration-none">
+                        <a href="javascript:void(0)" title="Lihat History Pinjaman Anggota"
+                          class="text-decoration-none">
                           001234
                         </a><br>
                         <strong>Budi Santoso</strong><br>
@@ -272,7 +271,8 @@
                       </td>
                       <td class="text-center text-muted">14 Des 2025</td>
                       <td>
-                        <a href="javascript:void(0)" title="Lihat History Pinjaman Anggota" class="text-decoration-none">
+                        <a href="javascript:void(0)" title="Lihat History Pinjaman Anggota"
+                          class="text-decoration-none">
                           001235
                         </a><br>
                         <strong>Siti Aminah</strong><br>
@@ -331,7 +331,8 @@
                       </td>
                       <td class="text-center text-muted">13 Des 2025</td>
                       <td>
-                        <a href="javascript:void(0)" title="Lihat History Pinjaman Anggota" class="text-decoration-none">
+                        <a href="javascript:void(0)" title="Lihat History Pinjaman Anggota"
+                          class="text-decoration-none">
                           001236
                         </a><br>
                         <strong>Ahmad Hidayat</strong><br>
@@ -384,7 +385,8 @@
                       </td>
                       <td class="text-center text-muted">12 Des 2025</td>
                       <td>
-                        <a href="javascript:void(0)" title="Lihat History Pinjaman Anggota" class="text-decoration-none">
+                        <a href="javascript:void(0)" title="Lihat History Pinjaman Anggota"
+                          class="text-decoration-none">
                           001237
                         </a><br>
                         <strong>Dewi Lestari</strong><br>
@@ -434,7 +436,8 @@
                       </td>
                       <td class="text-center text-muted">11 Des 2025</td>
                       <td>
-                        <a href="javascript:void(0)" title="Lihat History Pinjaman Anggota" class="text-decoration-none">
+                        <a href="javascript:void(0)" title="Lihat History Pinjaman Anggota"
+                          class="text-decoration-none">
                           001238
                         </a><br>
                         <strong>Eko Prasetyo</strong><br>
@@ -481,7 +484,7 @@
           <div class="py-6 px-6 text-center mt-4">
             <p class="mb-0 fs-4">Sistem Koperasi <strong>Akeno Multimedia Solution</strong> &copy; 2025</p>
           </div>
-          
+
         </div>
       </div>
     </div>
@@ -499,10 +502,10 @@
   <!-- DataTables -->
   <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
-  
+
   <!-- SweetAlert2 -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  
+
   <!-- Daterangepicker -->
   <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
@@ -528,7 +531,7 @@
 
     // Initialize DataTable
     let table;
-    $(document).ready(function() {
+    $(document).ready(function () {
       table = $('#tabelPengajuan').DataTable({
         language: {
           url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/id.json'
@@ -539,7 +542,7 @@
           { orderable: false, targets: [9] }
         ]
       });
-      
+
       // Initialize Daterangepicker
       $('#filterTanggal').daterangepicker({
         autoUpdateInput: false,
@@ -550,17 +553,17 @@
           format: 'DD/MM/YYYY'
         }
       });
-      
-      $('#filterTanggal').on('apply.daterangepicker', function(ev, picker) {
+
+      $('#filterTanggal').on('apply.daterangepicker', function (ev, picker) {
         $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
       });
-      
-      $('#filterTanggal').on('cancel.daterangepicker', function(ev, picker) {
+
+      $('#filterTanggal').on('cancel.daterangepicker', function (ev, picker) {
         $(this).val('');
       });
-      
+
       // Initialize Bulan Picker (Simple month input)
-      $('#filterBulan').on('click', function() {
+      $('#filterBulan').on('click', function () {
         const currentMonth = new Date().toISOString().slice(0, 7);
         Swal.fire({
           title: 'Pilih Bulan',
@@ -603,9 +606,9 @@
     function setujuiPengajuan(id) {
       currentAction = 'Setuju';
       currentId = id;
-      
+
       const today = new Date().toISOString().split('T')[0];
-      
+
       Swal.fire({
         title: 'Setujui Pengajuan',
         html: `
@@ -635,12 +638,12 @@
         preConfirm: () => {
           const tglCair = document.getElementById('swal-tglcair').value;
           const alasan = document.getElementById('swal-alasan').value;
-          
+
           if (!tglCair) {
             Swal.showValidationMessage('Tanggal pencairan wajib diisi!');
             return false;
           }
-          
+
           return { tglCair, alasan };
         }
       }).then((result) => {
@@ -675,12 +678,12 @@
         },
         preConfirm: () => {
           const alasan = document.getElementById('swal-alasan').value.trim();
-          
+
           if (!alasan) {
             Swal.showValidationMessage('Alasan penolakan wajib diisi!');
             return false;
           }
-          
+
           return { alasan };
         }
       }).then((result) => {
@@ -819,7 +822,7 @@
           Swal.showLoading();
         }
       });
-      
+
       // Simulate AJAX
       setTimeout(() => {
         // Success response
@@ -830,12 +833,12 @@
           timer: 2000,
           showConfirmButton: false
         });
-        
+
         // Refresh table
         if (table) {
           // table.ajax.reload(null, false);
         }
-        
+
         /* Production AJAX:
         $.ajax({
           url: 'pengajuan/aksi',
@@ -882,7 +885,7 @@
       const status = $('#filterStatus').val() || '';
       const bulan = $('#filterBulan').val() || '';
       const tanggal = $('#filterTanggal').val() || '';
-      
+
       const url = `cetak_laporan_pengajuan.php?jenis=${jenis}&status=${status}&bulan=${bulan}&tanggal=${tanggal}`;
       window.open(url, '_blank');
     }
@@ -893,9 +896,9 @@
       const status = $('#filterStatus').val();
       const bulan = $('#filterBulan').val();
       const tanggal = $('#filterTanggal').val();
-      
+
       console.log('Filter:', { jenis, status, bulan, tanggal });
-      
+
       // Show loading
       Swal.fire({
         title: 'Memproses...',
@@ -906,7 +909,7 @@
           Swal.showLoading();
         }
       });
-      
+
       // Simulate processing
       setTimeout(() => {
         Swal.close();
@@ -917,7 +920,7 @@
           timer: 1500,
           showConfirmButton: false
         });
-        
+
         // In production, reload table with filters
         // table.ajax.reload();
       }, 800);
@@ -929,11 +932,11 @@
       $('#filterStatus').val('');
       $('#filterBulan').val('');
       $('#filterTanggal').val('');
-      
+
       if (table) {
         table.search('').draw();
       }
-      
+
       Swal.fire({
         icon: 'info',
         title: 'Filter Direset',
@@ -973,13 +976,13 @@
       const status = $('#filterStatus').val() || '';
       const bulan = $('#filterBulan').val() || '';
       const tanggal = $('#filterTanggal').val() || '';
-      
+
       const url = `cetak_laporan_pengajuan.php?jenis=${jenis}&status=${status}&bulan=${bulan}&tanggal=${tanggal}`;
       window.open(url, '_blank');
     }
 
     // Initialize Bootstrap Tooltips
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
       tooltipTriggerList.map(function (tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl);

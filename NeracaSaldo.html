@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Laporan - KOPERASI</title>
-    <link rel="shortcut icon" type="image/png" href="./assets/images/logos/favicon.png" />
+    <link rel="shortcut icon" type="image/png" href="./assets/images/logos/logoAkeno-no-name.png" />
     <link rel="stylesheet" href="./assets/css/styles.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
@@ -78,7 +78,8 @@
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up">
                                     <a href="#" class="dropdown-item"><i class="ti ti-user"></i> Profil Saya</a>
                                     <a href="#" class="dropdown-item"><i class="ti ti-key"></i> Ubah Password</a>
-                                    <a href="https://ksp.walproject.net/login/logout" class="btn btn-outline-primary mx-2 mt-2 d-block">Logout</a>
+                                    <a href="https://ksp.walproject.net/login/logout"
+                                        class="btn btn-outline-primary mx-2 mt-2 d-block">Logout</a>
                                 </div>
                             </li>
                         </ul>
@@ -109,7 +110,7 @@
                             <form id="fmCari" method="GET">
                                 <input type="hidden" name="tgl_dari" id="tgl_dari">
                                 <input type="hidden" name="tgl_samp" id="tgl_samp">
-                                
+
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <label class="form-label fw-semibold mb-2">
@@ -131,7 +132,8 @@
                                             <button type="button" class="btn btn-info" onclick="cetak()">
                                                 <i class="ti ti-printer"></i> Cetak
                                             </button>
-                                            <button type="button" class="btn btn-outline-secondary" onclick="clearSearch()">
+                                            <button type="button" class="btn btn-outline-secondary"
+                                                onclick="clearSearch()">
                                                 <i class="ti ti-refresh"></i> Reset
                                             </button>
                                         </div>
@@ -160,7 +162,7 @@
                                             <td><strong> A. Aktiva Lancar </strong></td>
                                             <td></td>
                                         </tr>
-                                        
+
                                         <tr>
                                             <td></td>
                                             <td>A1. Kas Tunai</td>
@@ -221,7 +223,7 @@
                                             <td class="h_kanan">0</td>
                                             <td class="h_kanan">0</td>
                                         </tr>
-                                        
+
                                         <tr>
                                             <td class="h_tengah">&nbsp; <i class="ti ti-folder-open"></i></td>
                                             <td><strong>C. Aktiva Tetap Berwujud</strong></td>
@@ -252,7 +254,7 @@
                                             <td class="h_kanan">0</td>
                                             <td class="h_kanan">0</td>
                                         </tr>
-                                        
+
                                         <tr>
                                             <td class="h_tengah">&nbsp; <i class="ti ti-folder-open"></i></td>
                                             <td><strong>F. Utang</strong></td>
@@ -277,7 +279,7 @@
                                             <td class="h_kanan">0</td>
                                             <td class="h_kanan">0</td>
                                         </tr>
-                                        
+
                                         <tr>
                                             <td class="h_tengah">&nbsp; <i class="ti ti-folder-open"></i></td>
                                             <td><strong>H. Utang Jangka Panjang</strong></td>
@@ -290,7 +292,7 @@
                                             <td class="h_kanan">0</td>
                                             <td class="h_kanan">0</td>
                                         </tr>
-                                        
+
                                         <tr>
                                             <td class="h_tengah">&nbsp; <i class="ti ti-folder-open"></i></td>
                                             <td><strong>I. Modal</strong></td>
@@ -327,7 +329,7 @@
                                             <td class="h_kanan">0</td>
                                             <td class="h_kanan">0</td>
                                         </tr>
-                                        
+
                                         <tr>
                                             <td class="h_tengah">&nbsp; <i class="ti ti-folder-open"></i></td>
                                             <td><strong>J. Pendapatan</strong></td>
@@ -346,7 +348,7 @@
                                             <td class="h_kanan">0</td>
                                             <td class="h_kanan">0</td>
                                         </tr>
-                                        
+
                                         <tr>
                                             <td class="h_tengah">&nbsp; <i class="ti ti-folder-open"></i></td>
                                             <td><strong>K. Beban</strong></td>
@@ -444,7 +446,7 @@
         document.getElementById('tanggal').textContent = tanggal;
 
         // Initialize Daterangepicker
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#daterange-btn').daterangepicker({
                 ranges: {
                     'Hari ini': [moment(), moment()],
@@ -462,12 +464,12 @@
                 startDate: '2025-01-01',
                 endDate: '2025-12-31'
             },
-            function (start, end) {
-                doSearch();
-            });
+                function (start, end) {
+                    doSearch();
+                });
         });
 
-        function clearSearch(){
+        function clearSearch() {
             window.location.href = '#';
         }
 
@@ -477,19 +479,19 @@
             $('input[name=tgl_dari]').val(tgl_dari);
             $('input[name=tgl_samp]').val(tgl_samp);
             $('#fmCari').attr('action', '#');
-            $('#fmCari').submit();	
+            $('#fmCari').submit();
         }
 
-        function cetak () {
+        function cetak() {
             var tgl_dari = $('input[name=daterangepicker_start]').val();
             var tgl_samp = $('input[name=daterangepicker_end]').val();
-            
+
             var win = window.open('https://ksp.walproject.net/lap_neraca/cetak/?tgl_dari=' + tgl_dari + '&tgl_samp=' + tgl_samp + '');
             if (win) {
                 win.focus();
             } else {
                 alert('Popup jangan di block');
-            }	
+            }
         }
     </script>
 
@@ -497,13 +499,16 @@
         .h_tengah {
             text-align: center;
         }
+
         .h_kanan {
             text-align: right;
         }
+
         .header_kolom {
             background-color: #f1f5f9;
             font-weight: 600;
         }
+
         .table tbody tr:hover {
             background-color: #f8f9fa;
         }

@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Lama Angsuran - Sistem Koperasi Bina Tirta Lestari</title>
-  <link rel="shortcut icon" type="image/png" href="./assets/images/logos/favicon.png" />
+  <link rel="shortcut icon" type="image/png" href="./assets/images/logos/logoAkeno-no-name.png" />
   <link rel="stylesheet" href="./assets/css/styles.min.css" />
   <!-- DataTables CSS -->
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
@@ -150,7 +150,9 @@
                       <td class="text-center text-muted fw-medium">1</td>
                       <td>
                         <div class="d-flex align-items-center">
-                          <div class="bg-primary-subtle text-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                          <div
+                            class="bg-primary-subtle text-primary rounded-circle d-flex align-items-center justify-content-center"
+                            style="width: 40px; height: 40px;">
                             <i class="ti ti-calendar-time fs-5"></i>
                           </div>
                           <div class="ms-3">
@@ -174,7 +176,9 @@
                       <td class="text-center text-muted fw-medium">2</td>
                       <td>
                         <div class="d-flex align-items-center">
-                          <div class="bg-info-subtle text-info rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                          <div
+                            class="bg-info-subtle text-info rounded-circle d-flex align-items-center justify-content-center"
+                            style="width: 40px; height: 40px;">
                             <i class="ti ti-calendar-time fs-5"></i>
                           </div>
                           <div class="ms-3">
@@ -198,7 +202,9 @@
                       <td class="text-center text-muted fw-medium">3</td>
                       <td>
                         <div class="d-flex align-items-center">
-                          <div class="bg-warning-subtle text-warning rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                          <div
+                            class="bg-warning-subtle text-warning rounded-circle d-flex align-items-center justify-content-center"
+                            style="width: 40px; height: 40px;">
                             <i class="ti ti-calendar-time fs-5"></i>
                           </div>
                           <div class="ms-3">
@@ -222,7 +228,9 @@
                       <td class="text-center text-muted fw-medium">4</td>
                       <td>
                         <div class="d-flex align-items-center">
-                          <div class="bg-success-subtle text-success rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                          <div
+                            class="bg-success-subtle text-success rounded-circle d-flex align-items-center justify-content-center"
+                            style="width: 40px; height: 40px;">
                             <i class="ti ti-calendar-time fs-5"></i>
                           </div>
                           <div class="ms-3">
@@ -246,7 +254,9 @@
                       <td class="text-center text-muted fw-medium">5</td>
                       <td>
                         <div class="d-flex align-items-center">
-                          <div class="bg-danger-subtle text-danger rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                          <div
+                            class="bg-danger-subtle text-danger rounded-circle d-flex align-items-center justify-content-center"
+                            style="width: 40px; height: 40px;">
                             <i class="ti ti-calendar-time fs-5"></i>
                           </div>
                           <div class="ms-3">
@@ -270,7 +280,9 @@
                       <td class="text-center text-muted fw-medium">6</td>
                       <td>
                         <div class="d-flex align-items-center">
-                          <div class="bg-secondary-subtle text-secondary rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                          <div
+                            class="bg-secondary-subtle text-secondary rounded-circle d-flex align-items-center justify-content-center"
+                            style="width: 40px; height: 40px;">
                             <i class="ti ti-calendar-time fs-5"></i>
                           </div>
                           <div class="ms-3">
@@ -319,7 +331,8 @@
             <input type="hidden" id="editId" value="">
             <div class="mb-3">
               <label class="form-label">Lama Angsuran (Bulan) <span class="text-danger">*</span></label>
-              <input type="number" class="form-control" id="lamaAngsuran" placeholder="Masukkan lama angsuran" min="1" max="120" required>
+              <input type="number" class="form-control" id="lamaAngsuran" placeholder="Masukkan lama angsuran" min="1"
+                max="120" required>
               <div class="form-text">Masukkan jumlah bulan (contoh: 3, 6, 12, 24, 36)</div>
             </div>
             <div class="mb-3">
@@ -378,7 +391,7 @@
 
     // Init DataTable
     let table;
-    $(document).ready(function() {
+    $(document).ready(function () {
       table = $('#tabelLamaAngsuran').DataTable({
         language: {
           url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/id.json'
@@ -483,10 +496,10 @@
           if (row.getAttribute('data-id') === editId) {
             row.setAttribute('data-lama', lamaAngsuran);
             row.setAttribute('data-aktif', aktif);
-            
+
             const color = getIconColor(lamaAngsuran);
             const label = getLabelPeriode(lamaAngsuran);
-            
+
             row.cells[1].innerHTML = `
               <div class="d-flex align-items-center">
                 <div class="bg-${color}-subtle text-${color} rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
@@ -507,7 +520,7 @@
         const newId = Date.now();
         const color = getIconColor(lamaAngsuran);
         const label = getLabelPeriode(lamaAngsuran);
-        
+
         const newRow = `
           <tr data-id="${newId}" data-lama="${lamaAngsuran}" data-aktif="${aktif}">
             <td class="text-center text-muted fw-medium"></td>
@@ -573,12 +586,12 @@
       const headers = ['No', 'Lama Angsuran (Bulan)', 'Aktif'];
       rows.push(headers);
 
-      table.rows({ search: 'applied' }).every(function() {
+      table.rows({ search: 'applied' }).every(function () {
         const row = this.node();
         const no = this.index() + 1;
         const lama = row.getAttribute('data-lama');
         const aktif = row.getAttribute('data-aktif');
-        
+
         rows.push([no, lama, aktif]);
       });
 
@@ -588,12 +601,12 @@
       const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
       const link = document.createElement('a');
       const url = URL.createObjectURL(blob);
-      
+
       const tanggalEkspor = new Date().toISOString().slice(0, 10);
       link.setAttribute('href', url);
       link.setAttribute('download', `Lama_Angsuran_${tanggalEkspor}.csv`);
       link.style.visibility = 'hidden';
-      
+
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);

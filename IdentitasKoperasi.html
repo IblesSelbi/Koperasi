@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Identitas Koperasi - Sistem Koperasi Bina Tirta Lestari</title>
-  <link rel="shortcut icon" type="image/png" href="./assets/images/logos/favicon.png" />
+  <link rel="shortcut icon" type="image/png" href="./assets/images/logos/logoAkeno-no-name.png" />
   <link rel="stylesheet" href="./assets/css/styles.min.css" />
 </head>
 
@@ -104,21 +104,15 @@
             </div>
             <div class="card-body p-4">
               <form action="profil/update" method="post" enctype="multipart/form-data" id="formIdentitas">
-                
+
                 <!-- Nama Koperasi -->
                 <div class="mb-4">
                   <label for="nama_lembaga" class="form-label fw-semibold">
                     <i class="ti ti-building-community text-primary"></i> Nama Koperasi
                     <span class="text-danger">*</span>
                   </label>
-                  <input type="text" 
-                         class="form-control form-control-lg" 
-                         id="nama_lembaga" 
-                         name="nama_lembaga" 
-                         value="KOPERASI" 
-                         maxlength="255" 
-                         required
-                         placeholder="Masukkan nama koperasi">
+                  <input type="text" class="form-control form-control-lg" id="nama_lembaga" name="nama_lembaga"
+                    value="KOPERASI" maxlength="255" required placeholder="Masukkan nama koperasi">
                   <div class="form-text">Nama lengkap koperasi yang akan ditampilkan pada dokumen</div>
                 </div>
 
@@ -128,14 +122,8 @@
                     <i class="ti ti-user-star text-success"></i> Nama Pimpinan
                     <span class="text-danger">*</span>
                   </label>
-                  <input type="text" 
-                         class="form-control" 
-                         id="nama_ketua" 
-                         name="nama_ketua" 
-                         value="ATNAN" 
-                         maxlength="255" 
-                         required
-                         placeholder="Masukkan nama pimpinan">
+                  <input type="text" class="form-control" id="nama_ketua" name="nama_ketua" value="ATNAN"
+                    maxlength="255" required placeholder="Masukkan nama pimpinan">
                 </div>
 
                 <!-- No HP -->
@@ -144,14 +132,8 @@
                     <i class="ti ti-phone text-info"></i> No HP Pimpinan
                     <span class="text-danger">*</span>
                   </label>
-                  <input type="text" 
-                         class="form-control" 
-                         id="hp_ketua" 
-                         name="hp_ketua" 
-                         value="0852" 
-                         maxlength="255" 
-                         required
-                         placeholder="Contoh: 081234567890">
+                  <input type="text" class="form-control" id="hp_ketua" name="hp_ketua" value="0852" maxlength="255"
+                    required placeholder="Contoh: 081234567890">
                   <div class="form-text">Nomor HP aktif yang dapat dihubungi</div>
                 </div>
 
@@ -161,13 +143,8 @@
                     <i class="ti ti-map-pin text-danger"></i> Alamat Lengkap
                     <span class="text-danger">*</span>
                   </label>
-                  <textarea class="form-control" 
-                            id="alamat" 
-                            name="alamat" 
-                            rows="3" 
-                            maxlength="500" 
-                            required
-                            placeholder="Masukkan alamat lengkap koperasi">JL LASWI 2 TONJONG MAJALENGKA</textarea>
+                  <textarea class="form-control" id="alamat" name="alamat" rows="3" maxlength="500" required
+                    placeholder="Masukkan alamat lengkap koperasi">JL LASWI 2 TONJONG MAJALENGKA</textarea>
                 </div>
 
                 <!-- Telepon -->
@@ -175,13 +152,8 @@
                   <label for="telepon" class="form-label fw-semibold">
                     <i class="ti ti-phone-call text-warning"></i> Telepon Kantor
                   </label>
-                  <input type="text" 
-                         class="form-control" 
-                         id="telepon" 
-                         name="telepon" 
-                         value="0231-36387985" 
-                         maxlength="255"
-                         placeholder="Contoh: 021-1234567">
+                  <input type="text" class="form-control" id="telepon" name="telepon" value="0231-36387985"
+                    maxlength="255" placeholder="Contoh: 021-1234567">
                 </div>
 
                 <!-- Kota/Kabupaten -->
@@ -190,14 +162,8 @@
                     <i class="ti ti-location text-primary"></i> Kota/Kabupaten
                     <span class="text-danger">*</span>
                   </label>
-                  <input type="text" 
-                         class="form-control" 
-                         id="kota" 
-                         name="kota" 
-                         value="SULAWESI" 
-                         maxlength="255" 
-                         required
-                         placeholder="Masukkan nama kota/kabupaten">
+                  <input type="text" class="form-control" id="kota" name="kota" value="SULAWESI" maxlength="255"
+                    required placeholder="Masukkan nama kota/kabupaten">
                 </div>
 
                 <!-- Email -->
@@ -206,14 +172,8 @@
                     <i class="ti ti-mail text-info"></i> Email
                     <span class="text-danger">*</span>
                   </label>
-                  <input type="email" 
-                         class="form-control" 
-                         id="email" 
-                         name="email" 
-                         value="king@gmail.com" 
-                         maxlength="255" 
-                         required
-                         placeholder="contoh@email.com">
+                  <input type="email" class="form-control" id="email" name="email" value="king@gmail.com"
+                    maxlength="255" required placeholder="contoh@email.com">
                   <div class="form-text">Email resmi koperasi untuk korespondensi</div>
                 </div>
 
@@ -222,13 +182,8 @@
                   <label for="web" class="form-label fw-semibold">
                     <i class="ti ti-world text-success"></i> Website
                   </label>
-                  <input type="text" 
-                         class="form-control" 
-                         id="web" 
-                         name="web" 
-                         value="www.kingnet.id" 
-                         maxlength="255"
-                         placeholder="www.contoh.com">
+                  <input type="text" class="form-control" id="web" name="web" value="www.kingnet.id" maxlength="255"
+                    placeholder="www.contoh.com">
                   <div class="form-text">Alamat website koperasi (opsional)</div>
                 </div>
 
@@ -237,24 +192,17 @@
                   <label for="logo" class="form-label fw-semibold">
                     <i class="ti ti-photo text-warning"></i> Logo Koperasi
                   </label>
-                  <input type="file" 
-                         class="form-control" 
-                         id="logo" 
-                         name="logo" 
-                         accept="image/*">
+                  <input type="file" class="form-control" id="logo" name="logo" accept="image/*">
                   <div class="form-text">
                     Format: JPG, PNG, atau GIF. Ukuran maksimal: 2MB
                   </div>
-                  
+
                   <!-- Preview Logo Saat Ini -->
                   <div class="mt-3">
                     <div class="border rounded p-3 bg-light d-inline-block">
                       <p class="text-muted mb-2 small">Logo Saat Ini:</p>
-                      <img src="./assets/images/logos/logo-placeholder.png" 
-                           alt="Logo Koperasi" 
-                           class="img-thumbnail" 
-                           style="max-height: 150px;"
-                           id="previewLogo">
+                      <img src="./assets/images/logos/logo-placeholder.png" alt="Logo Koperasi" class="img-thumbnail"
+                        style="max-height: 150px;" id="previewLogo">
                     </div>
                   </div>
                 </div>
@@ -286,7 +234,8 @@
                     <div>
                       <h6 class="mb-1 fw-semibold">Informasi Penting</h6>
                       <p class="mb-0 text-muted fs-3">
-                        Data yang diisi di form ini akan digunakan pada laporan, kwitansi, dan dokumen resmi koperasi lainnya. 
+                        Data yang diisi di form ini akan digunakan pada laporan, kwitansi, dan dokumen resmi koperasi
+                        lainnya.
                         Pastikan semua informasi yang dimasukkan sudah benar dan sesuai.
                       </p>
                     </div>
@@ -300,7 +249,7 @@
           <div class="py-6 px-6 text-center mt-4">
             <p class="mb-0 fs-4">Sistem Koperasi <strong>Akeno Multimedia Solution</strong> &copy; 2025</p>
           </div>
-          
+
         </div>
       </div>
     </div>
@@ -350,7 +299,7 @@
     document.getElementById('tanggal').textContent = tanggal;
 
     // Preview Logo sebelum upload
-    document.getElementById('logo').addEventListener('change', function(e) {
+    document.getElementById('logo').addEventListener('change', function (e) {
       const file = e.target.files[0];
       if (file) {
         // Validasi ukuran file (max 2MB)
@@ -378,7 +327,7 @@
 
         // Preview image
         const reader = new FileReader();
-        reader.onload = function(event) {
+        reader.onload = function (event) {
           document.getElementById('previewLogo').src = event.target.result;
         };
         reader.readAsDataURL(file);
@@ -386,9 +335,9 @@
     });
 
     // Form Submit Handler
-    document.getElementById('formIdentitas').addEventListener('submit', function(e) {
+    document.getElementById('formIdentitas').addEventListener('submit', function (e) {
       e.preventDefault();
-      
+
       // Validasi form
       if (!this.checkValidity()) {
         e.stopPropagation();
@@ -469,9 +418,9 @@
     });
 
     // Form Reset Handler
-    document.querySelector('button[type="reset"]').addEventListener('click', function(e) {
+    document.querySelector('button[type="reset"]').addEventListener('click', function (e) {
       e.preventDefault();
-      
+
       Swal.fire({
         title: 'Reset Form?',
         text: 'Semua perubahan yang belum disimpan akan hilang',
@@ -486,7 +435,7 @@
           document.getElementById('formIdentitas').classList.remove('was-validated');
           // Reset preview logo
           document.getElementById('previewLogo').src = './assets/images/logos/logo-placeholder.png';
-          
+
           Swal.fire({
             icon: 'success',
             title: 'Form Direset',
@@ -499,7 +448,7 @@
     });
 
     // Initialize Bootstrap Tooltips
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
       tooltipTriggerList.map(function (tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl);
@@ -507,12 +456,12 @@
     });
 
     // Phone number validation
-    document.getElementById('hp_ketua').addEventListener('input', function(e) {
+    document.getElementById('hp_ketua').addEventListener('input', function (e) {
       // Hanya izinkan angka dan beberapa karakter khusus
       this.value = this.value.replace(/[^0-9+\-\s()]/g, '');
     });
 
-    document.getElementById('telepon').addEventListener('input', function(e) {
+    document.getElementById('telepon').addEventListener('input', function (e) {
       // Hanya izinkan angka dan beberapa karakter khusus
       this.value = this.value.replace(/[^0-9+\-\s()]/g, '');
     });

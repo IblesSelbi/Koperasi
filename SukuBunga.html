@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Suku Bunga & Administrasi - Sistem Koperasi Bina Tirta Lestari</title>
-  <link rel="shortcut icon" type="image/png" href="./assets/images/logos/favicon.png" />
+  <link rel="shortcut icon" type="image/png" href="./assets/images/logos/logoAkeno-no-name.png" />
   <link rel="stylesheet" href="./assets/css/styles.min.css" />
 </head>
 
@@ -104,15 +104,15 @@
             </div>
             <div class="card-body p-4">
               <form action="suku_bunga/update" method="post" id="formSukuBunga">
-                
+
                 <!-- Section 1: Tipe & Bunga Pinjaman -->
                 <div class="row mb-4">
                   <div class="col-12">
                     <h6 class="fw-semibold text-primary mb-3 pb-2 border-bottom">
-                       Pengaturan Pinjaman
+                      Pengaturan Pinjaman
                     </h6>
                   </div>
-                  
+
                   <div class="col-md-6 mb-3">
                     <label for="pinjaman_bunga_tipe" class="form-label fw-semibold">
                       <i class="ti ti-list text-info"></i> Tipe Pinjaman Bunga
@@ -131,15 +131,8 @@
                       <span class="text-danger">*</span>
                     </label>
                     <div class="input-group">
-                      <input type="number" 
-                             class="form-control" 
-                             id="bg_pinjam" 
-                             name="bg_pinjam" 
-                             value="5" 
-                             step="0.01" 
-                             min="0" 
-                             max="100"
-                             required>
+                      <input type="number" class="form-control" id="bg_pinjam" name="bg_pinjam" value="5" step="0.01"
+                        min="0" max="100" required>
                       <span class="input-group-text">%</span>
                     </div>
                     <div class="form-text">Persentase bunga yang dikenakan pada pinjaman</div>
@@ -158,13 +151,8 @@
                     <label for="biaya_adm" class="form-label fw-semibold">
                       <i class="ti ti-cash text-warning"></i> Biaya Administrasi (Rp)
                     </label>
-                    <input type="number" 
-                           class="form-control" 
-                           id="biaya_adm" 
-                           name="biaya_adm" 
-                           value="0" 
-                           min="0" 
-                           step="1000">
+                    <input type="number" class="form-control" id="biaya_adm" name="biaya_adm" value="0" min="0"
+                      step="1000">
                     <div class="form-text">Biaya admin untuk setiap transaksi pinjaman</div>
                   </div>
 
@@ -172,13 +160,7 @@
                     <label for="denda" class="form-label fw-semibold">
                       <i class="ti ti-alert-triangle text-danger"></i> Biaya Denda (Rp)
                     </label>
-                    <input type="number" 
-                           class="form-control" 
-                           id="denda" 
-                           name="denda" 
-                           value="0" 
-                           min="0" 
-                           step="1000">
+                    <input type="number" class="form-control" id="denda" name="denda" value="0" min="0" step="1000">
                     <div class="form-text">Denda keterlambatan pembayaran</div>
                   </div>
 
@@ -186,13 +168,8 @@
                     <label for="denda_hari" class="form-label fw-semibold">
                       <i class="ti ti-calendar-event text-info"></i> Tempo Tanggal Pembayaran
                     </label>
-                    <input type="number" 
-                           class="form-control" 
-                           id="denda_hari" 
-                           name="denda_hari" 
-                           value="15" 
-                           min="1" 
-                           max="31">
+                    <input type="number" class="form-control" id="denda_hari" name="denda_hari" value="15" min="1"
+                      max="31">
                     <div class="form-text">Tanggal jatuh tempo pembayaran setiap bulan</div>
                   </div>
                 </div>
@@ -201,7 +178,7 @@
                 <div class="row mb-4">
                   <div class="col-12">
                     <h6 class="fw-semibold text-primary mb-3 pb-2 border-bottom">
-                     Pembagian Dana & SHU
+                      Pembagian Dana & SHU
                     </h6>
                   </div>
 
@@ -210,14 +187,8 @@
                       <i class="ti ti-database text-primary"></i> Dana Cadangan (%)
                     </label>
                     <div class="input-group">
-                      <input type="number" 
-                             class="form-control" 
-                             id="dana_cadangan" 
-                             name="dana_cadangan" 
-                             value="40" 
-                             step="0.01" 
-                             min="0" 
-                             max="100">
+                      <input type="number" class="form-control" id="dana_cadangan" name="dana_cadangan" value="40"
+                        step="0.01" min="0" max="100">
                       <span class="input-group-text">%</span>
                     </div>
                   </div>
@@ -227,14 +198,8 @@
                       <i class="ti ti-briefcase text-success"></i> Jasa Usaha (%)
                     </label>
                     <div class="input-group">
-                      <input type="number" 
-                             class="form-control" 
-                             id="jasa_usaha" 
-                             name="jasa_usaha" 
-                             value="70" 
-                             step="0.01" 
-                             min="0" 
-                             max="100">
+                      <input type="number" class="form-control" id="jasa_usaha" name="jasa_usaha" value="70" step="0.01"
+                        min="0" max="100">
                       <span class="input-group-text">%</span>
                     </div>
                   </div>
@@ -244,14 +209,8 @@
                       <i class="ti ti-users text-info"></i> Jasa Anggota (%)
                     </label>
                     <div class="input-group">
-                      <input type="number" 
-                             class="form-control" 
-                             id="jasa_anggota" 
-                             name="jasa_anggota" 
-                             value="40" 
-                             step="0.01" 
-                             min="0" 
-                             max="100">
+                      <input type="number" class="form-control" id="jasa_anggota" name="jasa_anggota" value="40"
+                        step="0.01" min="0" max="100">
                       <span class="input-group-text">%</span>
                     </div>
                   </div>
@@ -261,14 +220,8 @@
                       <i class="ti ti-wallet text-warning"></i> Jasa Modal Anggota (%)
                     </label>
                     <div class="input-group">
-                      <input type="number" 
-                             class="form-control" 
-                             id="jasa_modal" 
-                             name="jasa_modal" 
-                             value="30" 
-                             step="0.01" 
-                             min="0" 
-                             max="100">
+                      <input type="number" class="form-control" id="jasa_modal" name="jasa_modal" value="30" step="0.01"
+                        min="0" max="100">
                       <span class="input-group-text">%</span>
                     </div>
                   </div>
@@ -278,14 +231,8 @@
                       <i class="ti ti-user-star text-danger"></i> Dana Pengurus (%)
                     </label>
                     <div class="input-group">
-                      <input type="number" 
-                             class="form-control" 
-                             id="dana_pengurus" 
-                             name="dana_pengurus" 
-                             value="5" 
-                             step="0.01" 
-                             min="0" 
-                             max="100">
+                      <input type="number" class="form-control" id="dana_pengurus" name="dana_pengurus" value="5"
+                        step="0.01" min="0" max="100">
                       <span class="input-group-text">%</span>
                     </div>
                   </div>
@@ -295,14 +242,8 @@
                       <i class="ti ti-user-check text-primary"></i> Dana Karyawan (%)
                     </label>
                     <div class="input-group">
-                      <input type="number" 
-                             class="form-control" 
-                             id="dana_karyawan" 
-                             name="dana_karyawan" 
-                             value="5" 
-                             step="0.01" 
-                             min="0" 
-                             max="100">
+                      <input type="number" class="form-control" id="dana_karyawan" name="dana_karyawan" value="5"
+                        step="0.01" min="0" max="100">
                       <span class="input-group-text">%</span>
                     </div>
                   </div>
@@ -312,14 +253,8 @@
                       <i class="ti ti-school text-success"></i> Dana Pendidikan (%)
                     </label>
                     <div class="input-group">
-                      <input type="number" 
-                             class="form-control" 
-                             id="dana_pend" 
-                             name="dana_pend" 
-                             value="5" 
-                             step="0.01" 
-                             min="0" 
-                             max="100">
+                      <input type="number" class="form-control" id="dana_pend" name="dana_pend" value="5" step="0.01"
+                        min="0" max="100">
                       <span class="input-group-text">%</span>
                     </div>
                   </div>
@@ -329,14 +264,8 @@
                       <i class="ti ti-heart-handshake text-info"></i> Dana Sosial (%)
                     </label>
                     <div class="input-group">
-                      <input type="number" 
-                             class="form-control" 
-                             id="dana_sosial" 
-                             name="dana_sosial" 
-                             value="5" 
-                             step="0.01" 
-                             min="0" 
-                             max="100">
+                      <input type="number" class="form-control" id="dana_sosial" name="dana_sosial" value="5"
+                        step="0.01" min="0" max="100">
                       <span class="input-group-text">%</span>
                     </div>
                   </div>
@@ -346,14 +275,8 @@
                       <i class="ti ti-receipt-tax text-warning"></i> Pajak PPh (%)
                     </label>
                     <div class="input-group">
-                      <input type="number" 
-                             class="form-control" 
-                             id="pjk_pph" 
-                             name="pjk_pph" 
-                             value="5" 
-                             step="0.01" 
-                             min="0" 
-                             max="100">
+                      <input type="number" class="form-control" id="pjk_pph" name="pjk_pph" value="5" step="0.01"
+                        min="0" max="100">
                       <span class="input-group-text">%</span>
                     </div>
                   </div>
@@ -363,7 +286,7 @@
                 <div class="alert alert-info border-info d-flex align-items-center" role="alert">
                   <i class="ti ti-info-circle fs-5 me-2"></i>
                   <div>
-                    <strong>Perhatian:</strong> Total persentase pembagian dana SHU sebaiknya tidak melebihi 100%. 
+                    <strong>Perhatian:</strong> Total persentase pembagian dana SHU sebaiknya tidak melebihi 100%.
                     Pastikan semua nilai sudah sesuai dengan ketentuan koperasi.
                   </div>
                 </div>
@@ -372,18 +295,18 @@
                 <div class="card bg-light border-0 mb-4">
                   <div class="card-body">
                     <h6 class="fw-semibold mb-3">
-                       Ringkasan Total Persentase
+                      Ringkasan Total Persentase
                     </h6>
                     <div class="row">
                       <div class="col-md-6">
                         <p class="mb-2">
-                          <span class="text-muted">Total Dana SHU:</span> 
+                          <span class="text-muted">Total Dana SHU:</span>
                           <strong id="totalDana" class="text-primary">0%</strong>
                         </p>
                       </div>
                       <div class="col-md-6">
                         <p class="mb-2">
-                          <span class="text-muted">Sisa Alokasi:</span> 
+                          <span class="text-muted">Sisa Alokasi:</span>
                           <strong id="sisaDana" class="text-success">100%</strong>
                         </p>
                       </div>
@@ -424,7 +347,7 @@
                     <div>
                       <h6 class="mb-1 fw-semibold">Informasi Penting</h6>
                       <p class="mb-0 text-muted fs-3">
-                        Setting ini akan mempengaruhi perhitungan bunga, biaya administrasi, dan pembagian SHU koperasi. 
+                        Setting ini akan mempengaruhi perhitungan bunga, biaya administrasi, dan pembagian SHU koperasi.
                         Pastikan semua nilai sudah sesuai dengan kebijakan koperasi.
                       </p>
                     </div>
@@ -440,7 +363,8 @@
                     <div>
                       <h6 class="mb-1 fw-semibold">Peringatan</h6>
                       <p class="mb-0 text-muted fs-3">
-                        Perubahan setting akan berlaku untuk transaksi baru. Transaksi yang sudah ada tidak akan terpengaruh.
+                        Perubahan setting akan berlaku untuk transaksi baru. Transaksi yang sudah ada tidak akan
+                        terpengaruh.
                       </p>
                     </div>
                   </div>
@@ -453,7 +377,7 @@
           <div class="py-6 px-6 text-center mt-4">
             <p class="mb-0 fs-4">Sistem Koperasi <strong>Akeno Multimedia Solution</strong> &copy; 2025</p>
           </div>
-          
+
         </div>
       </div>
     </div>
@@ -478,7 +402,7 @@
           loadScript("./assets/js/sidebarmenu.js");
           loadScript("./assets/js/app.min.js");
         });
-      
+
       // Calculate initial total
       hitungTotal();
     });
@@ -522,12 +446,12 @@
       // Update display
       document.getElementById('totalDana').textContent = total.toFixed(2) + '%';
       document.getElementById('sisaDana').textContent = sisa.toFixed(2) + '%';
-      
+
       // Update progress bar
       const progressBar = document.getElementById('progressDana');
       progressBar.style.width = Math.min(total, 100) + '%';
       progressBar.textContent = total.toFixed(2) + '%';
-      
+
       // Change color based on total
       progressBar.className = 'progress-bar';
       if (total > 100) {
@@ -560,8 +484,8 @@
 
     // Auto calculate on input change
     document.querySelectorAll('input[type="number"]').forEach(input => {
-      if (input.id !== 'biaya_adm' && input.id !== 'denda' && input.id !== 'denda_hari' && 
-          input.id !== 'bg_pinjam' && input.id !== 'pjk_pph') {
+      if (input.id !== 'biaya_adm' && input.id !== 'denda' && input.id !== 'denda_hari' &&
+        input.id !== 'bg_pinjam' && input.id !== 'pjk_pph') {
         input.addEventListener('input', hitungTotal);
       }
     });
@@ -580,7 +504,7 @@
         if (result.isConfirmed) {
           document.getElementById('formSukuBunga').reset();
           hitungTotal();
-          
+
           Swal.fire({
             icon: 'success',
             title: 'Form Direset',
@@ -593,9 +517,9 @@
     }
 
     // Form Submit Handler
-    document.getElementById('formSukuBunga').addEventListener('submit', function(e) {
+    document.getElementById('formSukuBunga').addEventListener('submit', function (e) {
       e.preventDefault();
-      
+
       // Validasi total persentase
       const total = parseFloat(document.getElementById('totalDana').textContent);
       if (total > 100) {
@@ -681,19 +605,19 @@
 
     // Number input validation (prevent negative values)
     document.querySelectorAll('input[type="number"]').forEach(input => {
-      input.addEventListener('keypress', function(e) {
+      input.addEventListener('keypress', function (e) {
         // Prevent minus sign
         if (e.key === '-' || e.key === 'e' || e.key === 'E') {
           e.preventDefault();
         }
       });
 
-      input.addEventListener('input', function() {
+      input.addEventListener('input', function () {
         // Remove negative values
         if (this.value < 0) {
           this.value = 0;
         }
-        
+
         // Limit percentage fields to max 100
         if (this.name !== 'biaya_adm' && this.name !== 'denda' && this.name !== 'denda_hari') {
           if (this.value > 100) {
@@ -708,7 +632,7 @@
     currencyInputs.forEach(id => {
       const input = document.getElementById(id);
       if (input) {
-        input.addEventListener('blur', function() {
+        input.addEventListener('blur', function () {
           if (this.value) {
             // Format as currency on blur for better UX
             const value = parseFloat(this.value);
@@ -722,7 +646,7 @@
     });
 
     // Initialize Bootstrap Tooltips
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
       tooltipTriggerList.map(function (tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl);
@@ -736,23 +660,23 @@
       const sisa = split[0].length % 3;
       let rupiah = split[0].substr(0, sisa);
       const ribuan = split[0].substr(sisa).match(/\d{3}/gi);
-      
+
       if (ribuan) {
         const separator = sisa ? '.' : '';
         rupiah += separator + ribuan.join('.');
       }
-      
+
       rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
       return 'Rp ' + rupiah;
     }
 
     // Show helpful tooltips on focus
     document.querySelectorAll('input, select').forEach(element => {
-      element.addEventListener('focus', function() {
+      element.addEventListener('focus', function () {
         this.classList.add('border-primary');
       });
-      
-      element.addEventListener('blur', function() {
+
+      element.addEventListener('blur', function () {
         this.classList.remove('border-primary');
       });
     });
